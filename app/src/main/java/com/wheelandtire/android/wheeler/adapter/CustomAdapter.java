@@ -13,16 +13,17 @@ import com.squareup.picasso.Picasso;
 import com.wheelandtire.android.wheeler.R;
 import com.wheelandtire.android.wheeler.model.Body;
 import com.wheelandtire.android.wheeler.model.Vehicle;
+import com.wheelandtire.android.wheeler.model.VehicleMake;
 
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private List<Vehicle> dataList;
+    private List<VehicleMake> dataList;
     private List<Body> bodies;
     private Context context;
 
-    public CustomAdapter(Context context,List<Vehicle> dataList){
+    public CustomAdapter(Context context,List<VehicleMake> dataList){
         this.context = context;
         this.dataList = dataList;
 //        this.bodies = bodies;
@@ -53,8 +54,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.txtTitle.setText(String.valueOf(dataList.get(position).getWheels().get(position).getFront().getTire()));
-
+//        holder.txtTitle.setText(String.valueOf(dataList.get(position).getWheels().get(position).getFront().getTire()));
+        holder.txtTitle.setText(String.valueOf(dataList.get(position).getName()));
 //        Picasso.Builder builder = new Picasso.Builder(context);
 //        builder.downloader(new OkHttp3Downloader(context));
 //        builder.build().load(bodies.get(position).getImage())

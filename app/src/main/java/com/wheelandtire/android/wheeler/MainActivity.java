@@ -1,8 +1,12 @@
 package com.wheelandtire.android.wheeler;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,14 +17,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
+import com.wheelandtire.android.wheeler.model.Vehicle;
+import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeResponse;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -96,13 +106,53 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        testRetrofit();
+    }
+
+
+    private CustomAdapter adapter;
+    private RecyclerView recyclerView;
+    ProgressDialog progressDoalog;
+
+    public void testRetrofit() {
+
+        progressDoalog = new ProgressDialog(MainActivity.this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+
+        /*Create handle for the RetrofitClientInstance interface*/
+        WheelSizeService service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
+        Call<List<Vehicle>> call = service.getVehicle();
+        call.enqueue(new Callback<List<Vehicle>>() {
+            @Override
+            public void onResponse(Call<List<Vehicle>> call, Response<List<Vehicle>> response) {
+                progressDoalog.dismiss();
+                generateDataList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Vehicle>> call, Throwable t) {
+                progressDoalog.dismiss();
+                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /*Method to generate List of data using RecyclerView with custom adapter*/
+    private void generateDataList(List<Vehicle> vehicleList) {
+        recyclerView = findViewById(R.id.customRecyclerView);
+        adapter = new CustomAdapter(this, vehicleList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
     
-    public void testRetrofit() {
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .create();
-
+//    public void testRetrofit() {
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+//                .create();
+//
 //        RequestInterceptor requestInterceptor = new RequestInterceptor() {
 //            @Override
 //            public void intercept(RequestFacade request) {
@@ -112,28 +162,28 @@ public class MainActivity extends AppCompatActivity
 //
 //        OkHttpClient client = new OkHttpClient();
 //        client.interceptors().add(requestInterceptor);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-
-        WheelSizeService service = retrofit.create(WheelSizeService.class);
-
-        Call<WheelSizeResponse> call = service.listVehicles();
-        call.enqueue(new Callback<WheelSizeResponse>() {
-            @Override
-            public void onResponse(Call<WheelSizeResponse> call, Response<WheelSizeResponse> response) {
-                WheelSizeResponse wheelSizeResponse = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<WheelSizeResponse> call, Throwable t) {
-
-            }
-        });
-    }
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
+//
+//
+//        WheelSizeService service = retrofit.create(WheelSizeService.class);
+//
+//        Call<WheelSizeResponse> call = service.listVehicles();
+//        call.enqueue(new Callback<WheelSizeResponse>() {
+//            @Override
+//            public void onResponse(Call<WheelSizeResponse> call, Response<WheelSizeResponse> response) {
+//                WheelSizeResponse wheelSizeResponse = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<WheelSizeResponse> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     @Override
     public void onBackPressed() {

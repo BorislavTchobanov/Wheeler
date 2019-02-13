@@ -13,14 +13,18 @@ public class WheelSizeResponse {
     @SerializedName("vehicles")
     List<Vehicle> vehicleList;
 
-    // public constructor is necessary for collections
-    public WheelSizeResponse() {
-        vehicleList = new ArrayList<Vehicle>();
-    }
-
-    public static WheelSizeResponse parseJSON(String response) {
-        Gson gson = new GsonBuilder().create();
-        WheelSizeResponse wheelSizeResponse = gson.fromJson(response, WheelSizeResponse.class);
-        return wheelSizeResponse;
-    }
+//    // public constructor is necessary for collections
+//    public WheelSizeResponse() {
+//        vehicleList = new ArrayList<Vehicle>();
+//    }
+//
+//    public List<Vehicle> getVehicleList() {
+//        return vehicleList;
+//    }
+//
+//    public static WheelSizeResponse parseJSON(String response) {
+//        Gson gson = new GsonBuilder().create();
+//        WheelSizeResponse wheelSizeResponse = gson.fromJson(response, WheelSizeResponse.class);
+//        return wheelSizeResponse;
+//    }
 }

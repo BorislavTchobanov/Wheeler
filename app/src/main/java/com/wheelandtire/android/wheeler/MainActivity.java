@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +41,7 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,9 @@ public class MainActivity extends AppCompatActivity
     private VehicleMakeAdapter adapter;
     private RecyclerView recyclerView;
     ProgressDialog progressDoalog;
+    private WheelSizeService service;
+    private String make;
+    private boolean isInitCall = true;
 
     public void testRetrofit() {
 
@@ -107,14 +112,18 @@ public class MainActivity extends AppCompatActivity
         progressDoalog.show();
 
         /*Create handle for the RetrofitClientInstance interface*/
-        WheelSizeService service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
-        Call<List<VehicleMake>> call = service.getVehicleModel("bmw", "1998");
+        service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
+//        Call<List<VehicleMake>> call = service.getVehicleModel("bmw", "1998");
+        Call<List<VehicleMake>> call = service.getVehicleMake();
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
             public void onResponse(Call<List<VehicleMake>> call, Response<List<VehicleMake>> response) {
                 progressDoalog.dismiss();
 //                generateDataList(response.body());
-                generateMakeDropDownList(response.body());
+                if (isInitCall && response.body() != null) {
+                    generateMakeDropDownList(response.body());
+                    isInitCall = false;
+                }
             }
 
             @Override
@@ -125,53 +134,118 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    /*Method to generate List of data using RecyclerView with custom adapter*/
-    private void generateDataList(List<VehicleMake> vehicleList) {
-        recyclerView = findViewById(R.id.customRecyclerView);
-        adapter = new VehicleMakeAdapter(vehicleList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void generateMakeDropDownList(List<VehicleMake> vehicleList) {
+    private void generateMakeDropDownList(final List<VehicleMake> vehicleList) {
         // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerMake);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerMake);
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+//        spinner.setOnItemSelectedListener(this);
 
+        VehicleMake makeHint = new VehicleMake();
+        makeHint.setName("Make");
+        makeHint.setSlug("Make");
+        vehicleList.add(0, makeHint);
         // Creating adapter for spinner
-        CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, vehicleList);
+        final CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, vehicleList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-    }
 
-    private void generateYearDropDownList(List<VehicleMake> vehicleList) {
-        // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerYear);
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+//        spinner.setSelection(0,false);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i > 0) {
+                    make = Objects.requireNonNull(dataAdapter.getItem(i)).getName();
+                    Toast.makeText(getApplicationContext(), make, Toast.LENGTH_LONG).show();
 
-        // Creating adapter for spinner
-        CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, vehicleList);
+                    Call<List<VehicleMake>> call = service.getVehicleModel(make);
+                    call.enqueue(new Callback<List<VehicleMake>>() {
+                        @Override
+                        public void onResponse(Call<List<VehicleMake>> call, Response<List<VehicleMake>> response) {
+                            progressDoalog.dismiss();
+//                generateDataList(response.body());
+                            generateModelDropDownList(response.body());
+                        }
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        @Override
+                        public void onFailure(Call<List<VehicleMake>> call, Throwable t) {
+                            progressDoalog.dismiss();
+                            Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // DO Nothing here
+            }
+        });
     }
 
     private void generateModelDropDownList(List<VehicleMake> vehicleList) {
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerModel);
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+//        spinner.setOnItemSelectedListener(this);
+        VehicleMake modelHint = new VehicleMake();
+        modelHint.setName("Model");
+        modelHint.setSlug("Model");
+        vehicleList.add(0, modelHint);
+        // Creating adapter for spinner
+        final CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, vehicleList);
 
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+
+//        spinner.setSelection(0,false);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i > 0) {
+                    String model = Objects.requireNonNull(dataAdapter.getItem(i)).getSlug();
+                    Toast.makeText(getApplicationContext(), model, Toast.LENGTH_LONG).show();
+
+                    Call<List<VehicleMake>> call = service.getVehicleYear(make, model);
+                    call.enqueue(new Callback<List<VehicleMake>>() {
+                        @Override
+                        public void onResponse(Call<List<VehicleMake>> call, Response<List<VehicleMake>> response) {
+                            progressDoalog.dismiss();
+//                generateDataList(response.body());
+                            generateYearDropDownList(response.body());
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<VehicleMake>> call, Throwable t) {
+                            progressDoalog.dismiss();
+                            Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // DO Nothing here
+            }
+        });
+    }
+
+    private void generateYearDropDownList(List<VehicleMake> vehicleList) {
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerYear);
+        // Spinner click listener
+//        spinner.setOnItemSelectedListener(this);
+        VehicleMake yearHint = new VehicleMake();
+        yearHint.setName("Year");
+        yearHint.setSlug("Year");
+        vehicleList.add(0, yearHint);
         // Creating adapter for spinner
         CustomAdapter dataAdapter = new CustomAdapter(this, android.R.layout.simple_spinner_item, vehicleList);
 
@@ -239,13 +313,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

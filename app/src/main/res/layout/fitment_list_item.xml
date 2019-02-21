@@ -24,7 +24,7 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/recipe_name"
+            android:id="@+id/generationTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/recipe_image"
@@ -32,20 +32,21 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         <TextView
-            android:id="@+id/recipe_num_of_servings_label"
+            android:id="@+id/trimTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_name"
-            android:layout_alignParentStart="true"
-            android:text="test" />
+            android:layout_below="@id/recipe_image"
+            android:layout_toEndOf="@id/generationTv"
+            android:layout_marginStart="@dimen/recipe_list_item_margin_bottom"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
         <TextView
-            android:id="@+id/recipe_num_of_servings"
+            android:id="@+id/boltPatternTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_name"
-            android:layout_marginStart="@dimen/recipe_list_item_margin_bottom"
-            android:layout_toEndOf="@id/recipe_num_of_servings_label" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/generationTv"
+            android:layout_marginStart="@dimen/recipe_list_item_margin_bottom" />
 
     </RelativeLayout>
 

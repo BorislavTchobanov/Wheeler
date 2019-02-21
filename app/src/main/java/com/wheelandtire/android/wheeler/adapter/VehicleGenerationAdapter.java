@@ -15,6 +15,7 @@ import com.wheelandtire.android.wheeler.model.Vehicle;
 import com.wheelandtire.android.wheeler.utility.ImageHandler;
 
 import java.util.List;
+import java.util.Random;
 
 public class VehicleGenerationAdapter extends RecyclerView.Adapter<VehicleGenerationAdapter.VehicleGenerationViewHolder> {
 
@@ -45,16 +46,32 @@ public class VehicleGenerationAdapter extends RecyclerView.Adapter<VehicleGenera
 
     @Override
     public void onBindViewHolder(@NonNull VehicleGenerationViewHolder vehicleGenerationViewHolder, int position) {
+        Vehicle vehicle = vehicleList.get(position);
+//        if (vehicle.getTrim() == null) {
+//            return;
+//        }
         final Generation generation = vehicleList.get(position).getGeneration();
-        vehicleGenerationViewHolder.setRecipeImage(generation.getBodies().get(0).getImage());
-        vehicleGenerationViewHolder.setRecipeName(generation.getName());
-//        vehicleGenerationViewHolder.setNumOfServings(generation.getBodies().g);
+        int vehicleImagesListSize = generation.getBodies().size();
+        vehicleGenerationViewHolder.setVehicleImage(generation.getBodies()
+                .get(new Random().nextInt(vehicleImagesListSize))
+                .getImage());
+        vehicleGenerationViewHolder.setVehicleGenerationName(generation.getName());
+        vehicleGenerationViewHolder.setVehicleTrim(vehicle.getTrim());
+        vehicleGenerationViewHolder.setVehicleBoltPattern(vehicle.getBoltPattern());
     }
 
     @Override
     public int getItemCount() {
         if (vehicleList == null) {
             return 0;
+        }
+
+        //TODO there are still repeating cards. Check how to fix!
+        for(int j=0; j < vehicleList.size(); j++) {
+            Vehicle vehicle = vehicleList.get(j);
+            if (vehicle.getTrim() == null) {
+                vehicleList.remove(j);
+            }
         }
         return vehicleList.size();
     }
@@ -63,26 +80,32 @@ public class VehicleGenerationAdapter extends RecyclerView.Adapter<VehicleGenera
         private ImageView imageView;
         private TextView generationNameTv;
         private TextView trimTv;
+        private TextView boltPatternTv;
 
         VehicleGenerationViewHolder(View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.recipe_image);
             itemView.setOnClickListener(this);
-            generationNameTv = itemView.findViewById(R.id.recipe_name);
-            trimTv = itemView.findViewById(R.id.recipe_num_of_servings);
+            generationNameTv = itemView.findViewById(R.id.generationTv);
+            trimTv = itemView.findViewById(R.id.trimTv);
+            boltPatternTv = itemView.findViewById(R.id.boltPatternTv);
         }
 
-        void setRecipeImage(final String imageUrl) {
+        void setVehicleImage(final String imageUrl) {
             ImageHandler.loadImage(imageUrl, imageView);
         }
 
-        void setRecipeName(String recipeName) {
-            generationNameTv.setText(recipeName);
+        void setVehicleGenerationName(String generationName) {
+            generationNameTv.setText(generationName);
         }
 
-        void setNumOfServings(int numOfServings) {
-            trimTv.setText(String.valueOf(numOfServings));
+        void setVehicleTrim(String vehicleTrim) {
+            trimTv.setText(vehicleTrim);
+        }
+
+        void setVehicleBoltPattern(String boltPattern) {
+            boltPatternTv.setText(boltPattern);
         }
 
         @Override

@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void generateYearDropDownList(List<VehicleMake> vehicleYearList, final String model) {
+    private void generateYearDropDownList(final List<VehicleMake> vehicleYearList, final String model) {
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerYear);
         // Spinner click listener

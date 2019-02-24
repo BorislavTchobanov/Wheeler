@@ -17,7 +17,7 @@ import com.wheelandtire.android.wheeler.utility.ImageHandler;
 import java.util.List;
 import java.util.Random;
 
-public class VehicleGenerationAdapter extends RecyclerView.Adapter<VehicleGenerationAdapter.VehicleGenerationViewHolder> {
+public class FitmentAdapter extends RecyclerView.Adapter<FitmentAdapter.VehicleGenerationViewHolder> {
 
     private List<Vehicle> vehicleList;
     private final ListItemClickListener mOnClickListener;
@@ -26,7 +26,7 @@ public class VehicleGenerationAdapter extends RecyclerView.Adapter<VehicleGenera
         void onListItemClick(int clickedItemIndex);
     }
 
-    public VehicleGenerationAdapter(List<Vehicle> vehicleList, ListItemClickListener listener) {
+    public FitmentAdapter(List<Vehicle> vehicleList, ListItemClickListener listener) {
         mOnClickListener = listener;
         this.vehicleList = vehicleList;
     }

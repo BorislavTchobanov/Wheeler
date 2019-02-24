@@ -3,7 +3,9 @@ package com.wheelandtire.android.wheeler.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Power {
+import java.io.Serializable;
+
+public class Power implements Serializable {
 
     @SerializedName("PS")
     @Expose

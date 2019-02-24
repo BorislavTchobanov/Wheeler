@@ -3,7 +3,9 @@ package com.wheelandtire.android.wheeler.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Market {
+import java.io.Serializable;
+
+public class Market implements Serializable {
 
     @SerializedName("slug")
     @Expose

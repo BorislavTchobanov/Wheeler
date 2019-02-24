@@ -3,7 +3,9 @@ package com.wheelandtire.android.wheeler.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Wheel {
+import java.io.Serializable;
+
+public class Wheel implements Serializable {
 
     @SerializedName("showing_fp_only")
     @Expose

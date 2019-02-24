@@ -3,7 +3,9 @@ package com.wheelandtire.android.wheeler.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleMake {
+import java.io.Serializable;
+
+public class VehicleMake implements Serializable {
 
     @SerializedName("slug")
     @Expose

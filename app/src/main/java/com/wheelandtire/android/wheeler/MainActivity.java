@@ -66,17 +66,18 @@ public class MainActivity extends AppCompatActivity
         SubActionButton button2 = itemBuilder.setContentView(item2).build();
         SubActionButton button3 = itemBuilder.setContentView(item3).build();
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "button1", Toast.LENGTH_SHORT).show();
-            }
-        });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "button3", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FitmentActivity.class);
+                startActivity(intent);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

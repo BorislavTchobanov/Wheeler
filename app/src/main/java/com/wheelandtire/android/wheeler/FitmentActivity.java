@@ -1,6 +1,7 @@
 package com.wheelandtire.android.wheeler;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,10 +52,16 @@ public class FitmentActivity extends AppCompatActivity
         recyclerView.setLayoutManager(gridLayoutManager);
 
 //        testRetrofit();
-        VehicleSearch.testRetrofit(this);
-        vehicleList = response.body();
-        setupRecyclerView(recyclerView);
+//        VehicleSearch.testRetrofit(this);
+//        vehicleList = response.body();
+//        setupRecyclerView(recyclerView);
 
+        final VehicleViewModel viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
+        viewModel.getVehicleMakes().observe(this, vehicleMakesResponse -> {
+                    if (vehicleMakesResponse != null) {
+                        String test = vehicleMakesResponse.get(0).getName();
+                    }
+                });
     }
 
     private static int calculateNoOfColumns(Context context) {

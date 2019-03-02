@@ -13,8 +13,7 @@ import retrofit2.Response;
 
 public class VehicleRepository {
 
-    //TODO continue working on that
-    https://medium.com/@amtechnovation/android-architecture-component-mvvm-part-1-a2e7cff07a76
+    //TODO continue working on that https://medium.com/@amtechnovation/android-architecture-component-mvvm-part-1-a2e7cff07a76
 
     private WheelSizeService apiService;
 
@@ -30,7 +29,7 @@ public class VehicleRepository {
         apiService = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
     }
 
-    public LiveData<List<VehicleMake>> VehicleMake() {
+    public LiveData<List<VehicleMake>> getVehicleMake() {
         final MutableLiveData<List<VehicleMake>> data = new MutableLiveData<>();
         apiService.getVehicleMake().enqueue(new Callback<List<VehicleMake>>() {
             @Override

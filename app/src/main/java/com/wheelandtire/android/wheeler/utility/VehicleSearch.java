@@ -43,6 +43,8 @@ public class VehicleSearch {
         /*Create handle for the RetrofitClientInstance interface*/
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
 //        Call<List<VehicleMake>> call = service.getVehicleModel("bmw", "1998");
+
+        final Spinner spinner = (Spinner) ((Activity) context).findViewById(R.id.spinnerMake);
         Call<List<VehicleMake>> call = service.getVehicleMake();
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
@@ -50,7 +52,8 @@ public class VehicleSearch {
                 progressDoalog.dismiss();
 //                generateDataList(response.body());
                 if (isInitCall && response.body() != null) {
-                    generateMakeDropDownList(response.body(), context, rootView);
+//                    generateMakeDropDownList(response.body(), context, rootView);
+                    generateDropDownList(context, response.body(), spinner, call, false);
                     isInitCall = false;
                 }
             }
@@ -63,7 +66,69 @@ public class VehicleSearch {
         });
     }
 
-    public static List<VehicleMake> generateDropDownList(final Context context, List<VehicleMake> vehicleMakeList, Spinner spinner, final Call<List<VehicleMake>> call) {
+//    private Spinner populateSpinner(Context context, Spinner spinner, List<VehicleMake> content) {
+//        VehicleMake makeHint = new VehicleMake();
+//        makeHint.setName("Make");
+//        makeHint.setSlug("Make");
+//        content.add(0, makeHint);
+//
+//        final CustomAdapter dataAdapter = new CustomAdapter(context, android.R.layout.simple_spinner_item, content);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(dataAdapter);
+//
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, final View view, int i, long l) {
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                // DO Nothing here
+//            }
+//        });
+//
+//        return spinner;
+//    }
+
+    private static void makeInitialServiceCall(Context context, Call<List<VehicleMake>> call, Spinner spinner, boolean isFinalCall) {
+        call.enqueue(new Callback<List<VehicleMake>>() {
+            @Override
+            public void onResponse(Call<List<VehicleMake>> call, Response<List<VehicleMake>> response) {
+                progressDoalog.dismiss();
+                if (isInitCall && response.body() != null) {
+                    generateDropDownList(context, response.body(), spinner, call, isFinalCall);
+                    isInitCall = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<VehicleMake>> call, Throwable t) {
+                progressDoalog.dismiss();
+            }
+        });
+    }
+
+    private static void makeFinalServiceCall(Call<List<Vehicle>> call) {
+        call.enqueue(new Callback<List<Vehicle>>() {
+            @Override
+            public void onResponse(Call<List<Vehicle>> call, Response<List<Vehicle>> response) {
+                progressDoalog.dismiss();
+                vehicleList = response.body();
+                setupRecyclerView(recyclerView);
+                Log.i("TEST","SUCCESS!!! = " + vehicleList);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Vehicle>> call, Throwable t) {
+                progressDoalog.dismiss();
+                Log.i("TEST","Something went wrong...Please try later! = " + t);
+            }
+        });
+    }
+
+    public static void generateDropDownList(final Context context, List<VehicleMake> vehicleMakeList, Spinner spinner, final Call call, boolean isFinalCall) {
 
         VehicleMake makeHint = new VehicleMake();
         makeHint.setName("Make");
@@ -81,21 +146,9 @@ public class VehicleSearch {
                     make = Objects.requireNonNull(dataAdapter.getItem(i)).getName();
                     Toast.makeText(context, make, Toast.LENGTH_LONG).show();
 
-//                    Call<List<VehicleMake>> call = service.getVehicleModel(make);
-                    call.enqueue(new Callback<List<VehicleMake>>() {
-                        @Override
-                        public void onResponse(Call<List<VehicleMake>> call, Response<List<VehicleMake>> response) {
-                            progressDoalog.dismiss();
-                            generateModelDropDownList(response.body(), context, rootView);
-                            vehicleListTest = response.body();
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<VehicleMake>> call, Throwable t) {
-                            progressDoalog.dismiss();
-                            Toast.makeText(context, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    if (isFinalCall) {
+                        makeFinalServiceCall(call);
+                    }
                 }
             }
 
@@ -104,8 +157,6 @@ public class VehicleSearch {
                 // DO Nothing here
             }
         });
-
-        return vehicleListTest;
     }
 
     private static void generateMakeDropDownList(final List<VehicleMake> vehicleMakeList, final Context context, final View rootView) {

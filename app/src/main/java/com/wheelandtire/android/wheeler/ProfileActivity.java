@@ -1,19 +1,21 @@
 package com.wheelandtire.android.wheeler;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.wheelandtire.android.wheeler.model.Vehicle;
-import com.wheelandtire.android.wheeler.utility.ImageHandler;
-
-import static com.wheelandtire.android.wheeler.FitmentActivity.EXTRA_VEHICLE;
+import com.wheelandtire.android.wheeler.model.VehicleProfile;
 
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private VehicleViewModel viewModel;
+    private VehicleSearch vehicleSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,34 @@ public class ProfileActivity extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.profileImage);
         image.setImageDrawable(getDrawable(R.drawable.test_image));
+        viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
 
+        vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
+        retrieveVehicleProfile();
+//        testRetrofit();
+    }
+
+    private void retrieveVehicleProfile() {
+        viewModel.getVehicleProfile().observe(this, this::populateViews);
+    }
+
+    private void populateViews(VehicleProfile vehicleProfile) {
+        EditText rimDiameter = findViewById(R.id.rimDiameterView);
+        EditText rimWidth = findViewById(R.id.rimWidthView);
+        EditText rimOffset = findViewById(R.id.rimOffsetView);
+        EditText tireWidth = findViewById(R.id.tireWidthView);
+        EditText tireHeight = findViewById(R.id.tireHeightView);
+        EditText tireDiameter = findViewById(R.id.tireDiameterView);
+
+        if (vehicleProfile != null) {
+            String tireAndRimDiameter = vehicleProfile.getProfileTireAndRimDiameter();
+            rimDiameter.setText(tireAndRimDiameter);
+            rimWidth.setText(vehicleProfile.getProfileRimWidth());
+            rimOffset.setText(vehicleProfile.getProfileRimOffset());
+            tireWidth.setText(vehicleProfile.getProfileTireWidth());
+            tireHeight.setText(vehicleProfile.getProfileTireHeight());
+            tireDiameter.setText(tireAndRimDiameter);
+        }
     }
 
     @Override
@@ -43,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            vehicleSearch.saveToProfile();
             return true;
         }
 

@@ -7,23 +7,28 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
 import com.wheelandtire.android.wheeler.model.VehicleMake;
+import com.wheelandtire.android.wheeler.model.VehicleProfile;
 import com.wheelandtire.android.wheeler.utility.VehicleRepository;
 
 import java.util.List;
 
 public class VehicleViewModel extends AndroidViewModel {
 
-    private LiveData<List<VehicleMake>> vehicleResponseObservable;
-    private static final MutableLiveData MUTABLE_LIVE_DATA = new MutableLiveData();
+//    private LiveData<List<VehicleMake>> vehicleResponseObservable;
+//    private static final MutableLiveData MUTABLE_LIVE_DATA = new MutableLiveData();
+    private final LiveData<VehicleProfile> vehicleProfile;
 
     public VehicleViewModel(@NonNull Application application) {
         super(application);
-        vehicleResponseObservable = VehicleRepository.getInstance().getVehicleMake();
+//        vehicleResponseObservable = VehicleRepository.getInstance().getVehicleMake();
+        VehicleProfileDatabase database = VehicleProfileDatabase.getInstance(this.getApplication());
+        vehicleProfile = database.vehicleProfileDao().loadAllFavouriteMoves();
     }
 
-    public LiveData<List<VehicleMake>> getVehicleMakes() {
-        return vehicleResponseObservable;
+    public LiveData<VehicleProfile> getVehicleProfile() {
+        return vehicleProfile;
     }
 
 

@@ -80,8 +80,10 @@ public class FitmentActivity extends AppCompatActivity
 //        Spinner spinner1 = findViewById(R.id.spinnerMake);
 //        Spinner spinner2 = findViewById(R.id.spinnerModel);
 //        Spinner spinner3 = findViewById(R.id.spinnerYear);
-        vehicleList = vehicleProfile.getVehicleList();
-        setupRecyclerView(recyclerView);
+        if (vehicleProfile != null) {
+            vehicleList = vehicleProfile.getVehicleList();
+            setupRecyclerView(recyclerView);
+        }
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override

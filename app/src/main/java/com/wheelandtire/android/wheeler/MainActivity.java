@@ -81,7 +81,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //attach the sub buttons
         new FloatingActionMenu.Builder(this)

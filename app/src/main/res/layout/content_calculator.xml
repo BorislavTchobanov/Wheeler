@@ -1,172 +1,290 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".FitmentActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/current_setup_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:layout_margin="10dp"
+        android:text="Current "
+        android:textAlignment="viewStart"
+        android:drawableEnd="@drawable/wheel_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/tireWidthView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="3"
-            android:digits="0123456789"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="/"/>
-
-        <EditText
-            android:id="@+id/tireHeightView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="R"/>
-
-        <EditText
-            android:id="@+id/tireDiameterView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="X"/>
-
-        <EditText
-            android:id="@+id/rimWidthView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textAlignment="viewEnd"
-            android:maxLength="4"
-            android:digits="0123456789."/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            android:text="j"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="ET"/>
-
-        <EditText
-            android:id="@+id/rimOffsetView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/tireWidthView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="3"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_slash"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_setup_label" />
 
-        <EditText
-            android:id="@+id/tireWidthViewNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="3"
-            android:digits="0123456789"/>
+    <TextView
+        android:id="@+id/current_setup_slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="/"
+        app:layout_constraintBottom_toBottomOf="@id/tireWidthView"
+        app:layout_constraintEnd_toStartOf="@+id/tireHeightView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireWidthView"
+        app:layout_constraintTop_toTopOf="@id/tireWidthView" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="/"/>
+    <EditText
+        android:id="@+id/tireHeightView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_slash"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_r"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_slash"
+        app:layout_constraintTop_toTopOf="@id/current_setup_slash" />
 
-        <EditText
-            android:id="@+id/tireHeightViewNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
+    <TextView
+        android:id="@+id/current_setup_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="R"
+        app:layout_constraintBottom_toBottomOf="@id/tireHeightView"
+        app:layout_constraintEnd_toStartOf="@+id/tireDiameterView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireHeightView"
+        app:layout_constraintTop_toTopOf="@id/tireHeightView" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="R"/>
+    <EditText
+        android:id="@+id/tireDiameterView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_r"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_x"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_r"
+        app:layout_constraintTop_toTopOf="@id/current_setup_r" />
 
-        <EditText
-            android:id="@+id/tireDiameterViewNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
+    <TextView
+        android:id="@+id/current_setup_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="X"
+        app:layout_constraintBottom_toBottomOf="@id/tireDiameterView"
+        app:layout_constraintEnd_toStartOf="@+id/rimWidthView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireDiameterView"
+        app:layout_constraintTop_toTopOf="@id/tireDiameterView" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="X"/>
+    <EditText
+        android:id="@+id/rimWidthView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789."
+        android:inputType="number"
+        android:maxLength="4"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_x"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_j"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_x"
+        app:layout_constraintTop_toTopOf="@id/current_setup_x" />
 
-        <EditText
-            android:id="@+id/rimWidthViewNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textAlignment="viewEnd"
-            android:maxLength="4"
-            android:digits="0123456789."/>
+    <TextView
+        android:id="@+id/current_setup_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="j"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="@id/rimWidthView"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_et"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rimWidthView"
+        app:layout_constraintTop_toTopOf="@id/rimWidthView" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="j"/>
+    <TextView
+        android:id="@+id/current_setup_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="ET"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_j"
+        app:layout_constraintEnd_toStartOf="@+id/rimOffsetView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_j"
+        app:layout_constraintTop_toTopOf="@id/current_setup_j" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="ET"/>
+    <EditText
+        android:id="@+id/rimOffsetView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_et"
+        app:layout_constraintTop_toTopOf="@id/current_setup_et" />
 
-        <EditText
-            android:id="@+id/rimOffsetViewNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number|none"
-            android:maxLength="2"
-            android:digits="0123456789"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/current_setup_label_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="New "
+        android:textAlignment="viewStart"
+        android:drawableEnd="@drawable/wheel_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tireWidthView" />
+
+    <EditText
+        android:id="@+id/tireWidthViewNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="3"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_slash_new"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_label_new"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_setup_label_new" />
+
+    <TextView
+        android:id="@+id/current_setup_slash_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="/"
+        app:layout_constraintBottom_toBottomOf="@id/tireWidthViewNew"
+        app:layout_constraintEnd_toStartOf="@+id/tireHeightViewNew"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireWidthViewNew"
+        app:layout_constraintTop_toTopOf="@id/tireWidthViewNew" />
+
+    <EditText
+        android:id="@+id/tireHeightViewNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_slash_new"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_r_new"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_slash_new"
+        app:layout_constraintTop_toTopOf="@id/current_setup_slash_new" />
+
+    <TextView
+        android:id="@+id/current_setup_r_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="R"
+        app:layout_constraintBottom_toBottomOf="@id/tireHeightViewNew"
+        app:layout_constraintEnd_toStartOf="@+id/tireDiameterViewNew"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireHeightViewNew"
+        app:layout_constraintTop_toTopOf="@id/tireHeightViewNew" />
+
+    <EditText
+        android:id="@+id/tireDiameterViewNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_r_new"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_x_new"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_r_new"
+        app:layout_constraintTop_toTopOf="@id/current_setup_r_new" />
+
+    <TextView
+        android:id="@+id/current_setup_x_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="X"
+        app:layout_constraintBottom_toBottomOf="@id/tireDiameterViewNew"
+        app:layout_constraintEnd_toStartOf="@+id/rimWidthViewNew"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tireDiameterViewNew"
+        app:layout_constraintTop_toTopOf="@id/tireDiameterViewNew" />
+
+    <EditText
+        android:id="@+id/rimWidthViewNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789."
+        android:inputType="number"
+        android:maxLength="4"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_x_new"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_j_new"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_x_new"
+        app:layout_constraintTop_toTopOf="@id/current_setup_x_new" />
+
+    <TextView
+        android:id="@+id/current_setup_j_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="j"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="@id/rimWidthViewNew"
+        app:layout_constraintEnd_toStartOf="@+id/current_setup_et_new"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rimWidthViewNew"
+        app:layout_constraintTop_toTopOf="@id/rimWidthViewNew" />
+
+    <TextView
+        android:id="@+id/current_setup_et_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="ET"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_j_new"
+        app:layout_constraintEnd_toStartOf="@+id/rimOffsetViewNew"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_j_new"
+        app:layout_constraintTop_toTopOf="@id/current_setup_j_new" />
+
+    <EditText
+        android:id="@+id/rimOffsetViewNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:maxLength="2"
+        app:layout_constraintBottom_toBottomOf="@id/current_setup_et_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/current_setup_et_new"
+        app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

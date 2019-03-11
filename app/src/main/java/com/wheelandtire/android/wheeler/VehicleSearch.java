@@ -2,6 +2,8 @@ package com.wheelandtire.android.wheeler;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
 import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
 import com.wheelandtire.android.wheeler.model.Vehicle;
@@ -17,6 +21,9 @@ import com.wheelandtire.android.wheeler.model.VehicleProfile;
 import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,9 +31,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class VehicleSearch {
 
 
+    private static final String SHARED_PREFS_FILE = "wheelerPrefs";
+    private static final String PREF_VEHICLE_MAKES_LIST = "pref_vehicle_makes_list";
     private Context context;
     ProgressDialog progressDoalog;
     private WheelSizeService service;
@@ -54,17 +65,25 @@ public class VehicleSearch {
 
 //        Call<List<VehicleMake>> call = service.getVehicleModel("bmw", "1998");
         Call<List<VehicleMake>> call = makeCall(1, null, null, null);
-        makeInitialServiceCall(call, 2);
+        List<VehicleMake> vehicleMakeList = getVehicleMakeList(PREF_VEHICLE_MAKES_LIST);
+        if (vehicleMakeList == null) {
+            makeInitialServiceCall(call, 2);
+        } else {
+            generateDropDownList(vehicleMakeList, 2);
+        }
 
     }
 
-    private void makeInitialServiceCall(Call<List<VehicleMake>> call, int callNumber) {
+    private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
             public void onResponse(@NonNull Call<List<VehicleMake>> call, @NonNull Response<List<VehicleMake>> response) {
                 progressDoalog.dismiss();
                 if (response.body() != null) {
-                    generateDropDownList(response.body(), callNumber);
+                    if (nextCallNumber == 2) {
+                        saveVehicleMakeList(response.body());
+                    }
+                    generateDropDownList(response.body(), nextCallNumber);
                 }
             }
 
@@ -132,7 +151,7 @@ public class VehicleSearch {
     }
 
     private void generateDropDownList(List<VehicleMake> vehicleMakeList,
-                                      int callNumber) {
+                                      int nextCallNumber) {
 
         VehicleMake makeHint = new VehicleMake();
         makeHint.setName("Make");
@@ -160,9 +179,9 @@ public class VehicleSearch {
 //                        }
 //                        makeFinalServiceCall(call);
 //                    } else {
-                        if (callNumber <= numOfDropDowns) {
-                            Call<List<VehicleMake>> listCall = makeCall(callNumber, item, item, item);
-                            makeInitialServiceCall(listCall, callNumber + 1);
+                        if (nextCallNumber <= numOfDropDowns) {
+                            Call<List<VehicleMake>> listCall = makeCall(nextCallNumber, item, item, item);
+                            makeInitialServiceCall(listCall, nextCallNumber + 1);
                         } else {
                             trim = item;
                         }
@@ -202,5 +221,22 @@ public class VehicleSearch {
             default:
         }
         return call;
+    }
+
+    public void saveVehicleMakeList(List<VehicleMake> vehicleMakeList) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(vehicleMakeList);
+        editor.putString(PREF_VEHICLE_MAKES_LIST, json);
+        editor.apply();
+    }
+
+    public ArrayList<VehicleMake> getVehicleMakeList(String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<List<VehicleMake>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 }

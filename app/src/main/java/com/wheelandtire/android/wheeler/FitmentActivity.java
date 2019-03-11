@@ -77,9 +77,7 @@ public class FitmentActivity extends AppCompatActivity
     }
 
     private void populateViews(VehicleProfile vehicleProfile) {
-//        Spinner spinner1 = findViewById(R.id.spinnerMake);
-//        Spinner spinner2 = findViewById(R.id.spinnerModel);
-//        Spinner spinner3 = findViewById(R.id.spinnerYear);
+
         if (vehicleProfile != null) {
             vehicleList = vehicleProfile.getVehicleList();
             setupRecyclerView(recyclerView);

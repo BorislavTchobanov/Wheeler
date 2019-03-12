@@ -28,9 +28,9 @@
         android:digits="0123456789"
         android:inputType="number|none"
         android:maxLength="3"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_slash"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_slash"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_label"
+        app:layout_constraintStart_toEndOf="@id/current_setup_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/current_setup_label" />
 
@@ -41,9 +41,9 @@
         android:layout_margin="10dp"
         android:text="/"
         app:layout_constraintBottom_toBottomOf="@id/tireWidthView"
-        app:layout_constraintEnd_toStartOf="@+id/tireHeightView"
+        app:layout_constraintEnd_toStartOf="@id/tireHeightView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireWidthView"
+        app:layout_constraintStart_toEndOf="@id/tireWidthView"
         app:layout_constraintTop_toTopOf="@id/tireWidthView" />
 
     <EditText
@@ -54,9 +54,9 @@
         android:inputType="number|none"
         android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_slash"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_r"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_r"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_slash"
+        app:layout_constraintStart_toEndOf="@id/current_setup_slash"
         app:layout_constraintTop_toTopOf="@id/current_setup_slash" />
 
     <TextView
@@ -66,9 +66,9 @@
         android:layout_margin="10dp"
         android:text="R"
         app:layout_constraintBottom_toBottomOf="@id/tireHeightView"
-        app:layout_constraintEnd_toStartOf="@+id/tireDiameterView"
+        app:layout_constraintEnd_toStartOf="@id/tireDiameterView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireHeightView"
+        app:layout_constraintStart_toEndOf="@id/tireHeightView"
         app:layout_constraintTop_toTopOf="@id/tireHeightView" />
 
     <EditText
@@ -79,9 +79,9 @@
         android:inputType="number|none"
         android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_r"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_x"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_x"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_r"
+        app:layout_constraintStart_toEndOf="@id/current_setup_r"
         app:layout_constraintTop_toTopOf="@id/current_setup_r" />
 
     <TextView
@@ -91,9 +91,9 @@
         android:layout_margin="10dp"
         android:text="X"
         app:layout_constraintBottom_toBottomOf="@id/tireDiameterView"
-        app:layout_constraintEnd_toStartOf="@+id/rimWidthView"
+        app:layout_constraintEnd_toStartOf="@id/rimWidthView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireDiameterView"
+        app:layout_constraintStart_toEndOf="@id/tireDiameterView"
         app:layout_constraintTop_toTopOf="@id/tireDiameterView" />
 
     <EditText
@@ -105,9 +105,9 @@
         android:maxLength="4"
         android:textAlignment="viewEnd"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_x"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_j"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_j"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_x"
+        app:layout_constraintStart_toEndOf="@id/current_setup_x"
         app:layout_constraintTop_toTopOf="@id/current_setup_x" />
 
     <TextView
@@ -117,9 +117,9 @@
         android:text="j"
         android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="@id/rimWidthView"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_et"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_et"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/rimWidthView"
+        app:layout_constraintStart_toEndOf="@id/rimWidthView"
         app:layout_constraintTop_toTopOf="@id/rimWidthView" />
 
     <TextView
@@ -129,9 +129,9 @@
         android:layout_margin="10dp"
         android:text="ET"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_j"
-        app:layout_constraintEnd_toStartOf="@+id/rimOffsetView"
+        app:layout_constraintEnd_toStartOf="@id/rimOffsetView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_j"
+        app:layout_constraintStart_toEndOf="@id/current_setup_j"
         app:layout_constraintTop_toTopOf="@id/current_setup_j" />
 
     <EditText
@@ -144,7 +144,7 @@
         app:layout_constraintBottom_toBottomOf="@id/current_setup_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_et"
+        app:layout_constraintStart_toEndOf="@id/current_setup_et"
         app:layout_constraintTop_toTopOf="@id/current_setup_et" />
 
     <TextView
@@ -167,9 +167,9 @@
         android:digits="0123456789"
         android:inputType="number|none"
         android:maxLength="3"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_slash_new"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_slash_new"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_label_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_label_new"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/current_setup_label_new" />
 
@@ -180,9 +180,9 @@
         android:layout_margin="10dp"
         android:text="/"
         app:layout_constraintBottom_toBottomOf="@id/tireWidthViewNew"
-        app:layout_constraintEnd_toStartOf="@+id/tireHeightViewNew"
+        app:layout_constraintEnd_toStartOf="@id/tireHeightViewNew"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireWidthViewNew"
+        app:layout_constraintStart_toEndOf="@id/tireWidthViewNew"
         app:layout_constraintTop_toTopOf="@id/tireWidthViewNew" />
 
     <EditText
@@ -193,9 +193,9 @@
         android:inputType="number|none"
         android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_slash_new"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_r_new"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_r_new"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_slash_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_slash_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_slash_new" />
 
     <TextView
@@ -205,9 +205,9 @@
         android:layout_margin="10dp"
         android:text="R"
         app:layout_constraintBottom_toBottomOf="@id/tireHeightViewNew"
-        app:layout_constraintEnd_toStartOf="@+id/tireDiameterViewNew"
+        app:layout_constraintEnd_toStartOf="@id/tireDiameterViewNew"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireHeightViewNew"
+        app:layout_constraintStart_toEndOf="@id/tireHeightViewNew"
         app:layout_constraintTop_toTopOf="@id/tireHeightViewNew" />
 
     <EditText
@@ -218,9 +218,9 @@
         android:inputType="number|none"
         android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_r_new"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_x_new"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_x_new"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_r_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_r_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_r_new" />
 
     <TextView
@@ -230,9 +230,9 @@
         android:layout_margin="10dp"
         android:text="X"
         app:layout_constraintBottom_toBottomOf="@id/tireDiameterViewNew"
-        app:layout_constraintEnd_toStartOf="@+id/rimWidthViewNew"
+        app:layout_constraintEnd_toStartOf="@id/rimWidthViewNew"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tireDiameterViewNew"
+        app:layout_constraintStart_toEndOf="@id/tireDiameterViewNew"
         app:layout_constraintTop_toTopOf="@id/tireDiameterViewNew" />
 
     <EditText
@@ -244,9 +244,9 @@
         android:maxLength="4"
         android:textAlignment="viewEnd"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_x_new"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_j_new"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_j_new"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_x_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_x_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_x_new" />
 
     <TextView
@@ -256,9 +256,9 @@
         android:text="j"
         android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="@id/rimWidthViewNew"
-        app:layout_constraintEnd_toStartOf="@+id/current_setup_et_new"
+        app:layout_constraintEnd_toStartOf="@id/current_setup_et_new"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/rimWidthViewNew"
+        app:layout_constraintStart_toEndOf="@id/rimWidthViewNew"
         app:layout_constraintTop_toTopOf="@id/rimWidthViewNew" />
 
     <TextView
@@ -268,9 +268,9 @@
         android:layout_margin="10dp"
         android:text="ET"
         app:layout_constraintBottom_toBottomOf="@id/current_setup_j_new"
-        app:layout_constraintEnd_toStartOf="@+id/rimOffsetViewNew"
+        app:layout_constraintEnd_toStartOf="@id/rimOffsetViewNew"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_j_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_j_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_j_new" />
 
     <EditText
@@ -283,7 +283,7 @@
         app:layout_constraintBottom_toBottomOf="@id/current_setup_et_new"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/current_setup_et_new"
+        app:layout_constraintStart_toEndOf="@id/current_setup_et_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
 
 

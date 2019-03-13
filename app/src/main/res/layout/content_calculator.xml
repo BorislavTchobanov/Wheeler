@@ -287,102 +287,58 @@
         app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
 
 
-    <TextView
-        android:id="@+id/row1_col1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/cell_shape"
-        android:gravity="center_vertical"
-        android:padding="5dp"
-        android:text="Rims"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/row1_col2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew" />
-
-    <TextView
-        android:id="@+id/row1_col2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:background="@drawable/cell_shape"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="Rim 1 (16x7 ET 47)"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/row1_col3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/row1_col1"
-        app:layout_constraintTop_toTopOf="@id/row1_col1" />
-
-    <TextView
-        android:id="@+id/row1_col3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:background="@drawable/cell_shape"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="Rim 2 (17x8 ET 30)"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/row1_col2"
-        app:layout_constraintTop_toTopOf="@id/row1_col2" />
-
     <TableLayout
         android:id="@+id/calculator_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="50dp"
+        android:measureWithLargestChild="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew">
         <!--Rims-->
-        <!--<TableRow-->
-        <!--android:id="@+id/table_row1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-        <!--android:id="@+id/row1_col1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/cell_shape"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:padding="5dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textColor="#000"-->
-        <!--android:text="Rims"/>-->
-        <!--<TextView-->
-        <!--android:id="@+id/row1_col2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/cell_shape"-->
-        <!--android:layout_weight="2"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="5dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textColor="#000"-->
-        <!--android:text="Rim 1 (16x7 ET 47)"/>-->
-        <!--<TextView-->
-        <!--android:id="@+id/row1_col3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/cell_shape"-->
-        <!--android:layout_weight="2"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="5dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textColor="#000"-->
-        <!--android:text="Rim 2 (17x8 ET 30)"/>-->
-        <!--</TableRow>-->
+        <TableRow
+            android:id="@+id/table_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/row1_col1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Rims"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row1_col2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Rim 1 (16x7 ET 47)"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row1_col3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Rim 2 (17x8 ET 30)"
+                android:textColor="#000"
+                android:textStyle="bold" />
+        </TableRow>
 
         <TableRow
             android:id="@+id/table_row2"
@@ -391,8 +347,8 @@
 
             <TextView
                 android:id="@+id/row2_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -402,8 +358,8 @@
 
             <TextView
                 android:id="@+id/row2_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -413,8 +369,8 @@
 
             <TextView
                 android:id="@+id/row2_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -430,8 +386,8 @@
 
             <TextView
                 android:id="@+id/row3_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -441,8 +397,8 @@
 
             <TextView
                 android:id="@+id/row3_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -452,8 +408,8 @@
 
             <TextView
                 android:id="@+id/row3_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -469,8 +425,8 @@
 
             <TextView
                 android:id="@+id/row4_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -480,8 +436,8 @@
 
             <TextView
                 android:id="@+id/row4_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -491,8 +447,8 @@
 
             <TextView
                 android:id="@+id/row4_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -508,8 +464,8 @@
 
             <TextView
                 android:id="@+id/row5_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -519,8 +475,8 @@
 
             <TextView
                 android:id="@+id/row5_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -530,8 +486,8 @@
 
             <TextView
                 android:id="@+id/row5_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -548,8 +504,8 @@
 
             <TextView
                 android:id="@+id/row6_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -560,8 +516,8 @@
 
             <TextView
                 android:id="@+id/row6_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -572,8 +528,8 @@
 
             <TextView
                 android:id="@+id/row6_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -590,8 +546,8 @@
 
             <TextView
                 android:id="@+id/row7_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -601,8 +557,8 @@
 
             <TextView
                 android:id="@+id/row7_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -612,8 +568,8 @@
 
             <TextView
                 android:id="@+id/row7_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -629,8 +585,8 @@
 
             <TextView
                 android:id="@+id/row8_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -640,8 +596,8 @@
 
             <TextView
                 android:id="@+id/row8_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -651,8 +607,8 @@
 
             <TextView
                 android:id="@+id/row8_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -668,8 +624,8 @@
 
             <TextView
                 android:id="@+id/row9_col1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
@@ -679,8 +635,8 @@
 
             <TextView
                 android:id="@+id/row9_col2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
@@ -690,8 +646,8 @@
 
             <TextView
                 android:id="@+id/row9_col3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"

@@ -132,7 +132,9 @@ public class MainActivity extends AppCompatActivity
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCalculator();
+//                startCalculator();
+                Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
+                startActivity(intent);
             }
         });
 

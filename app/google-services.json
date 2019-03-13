@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "286459267588",
+    "firebase_url": "https://capstoneproject-bc557.firebaseio.com",
+    "project_id": "capstoneproject-bc557",
+    "storage_bucket": "capstoneproject-bc557.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286459267588:android:2759cafdc58c1642",
+        "android_client_info": {
+          "package_name": "com.wheelandtire.android.wheeler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286459267588-9oem224p0dcg5ue234kh83bm309h1ipc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs16ZN0xarF_SG3Xos4YshjXTSn-Iu5QM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,16 +1,10 @@
 package com.wheelandtire.android.wheeler;
 
-import android.animation.AnimatorSet;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +14,6 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -31,10 +24,6 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 //import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
 import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
-
-import org.w3c.dom.Text;
-
-import static com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.POSITION_TOP_CENTER;
 
 
 public class MainActivity extends AppCompatActivity
@@ -120,7 +109,7 @@ public class MainActivity extends AppCompatActivity
 
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 
-        itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_sub_button_gray));
+        itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.fab_sub_button_nobackground));
 
         ImageView item1 = new ImageView(this);
         item1.setImageResource(R.mipmap.write_ups);

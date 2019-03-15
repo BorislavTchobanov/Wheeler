@@ -9,13 +9,21 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.wheelandtire.android.wheeler.model.Vehicle;
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
+import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
+import com.wheelandtire.android.wheeler.utility.WheelSizeService;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 
 public class ProfileActivity extends AppCompatActivity {
 
     private VehicleViewModel viewModel;
     private VehicleSearch vehicleSearch;
+    private WheelSizeService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         image.setImageDrawable(getDrawable(R.drawable.test_image));
         viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
 
+        service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
         vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
         retrieveVehicleProfile();
 //        testRetrofit();
@@ -72,7 +81,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            vehicleSearch.saveToProfile();
+            Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                    vehicleSearch.getYear(), vehicleSearch.getTrim());
+            vehicleSearch.makeFinalServiceCall(call);
+//            vehicleSearch.saveToProfile();
             return true;
         }
 

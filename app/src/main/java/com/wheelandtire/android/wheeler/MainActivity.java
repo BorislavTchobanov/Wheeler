@@ -1,6 +1,9 @@
 package com.wheelandtire.android.wheeler;
 
+import android.animation.AnimatorSet;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -23,6 +31,10 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 //import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
 import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
+
+import org.w3c.dom.Text;
+
+import static com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.POSITION_TOP_CENTER;
 
 
 public class MainActivity extends AppCompatActivity
@@ -36,19 +48,24 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        TextView textView = findViewById(R.id.title_tv);
+        Typeface face;
+        face = Typeface.createFromAsset(getAssets(), "fonts/Spantaran.otf");
+        textView.setTypeface(face);
 
         fabComponent();
     }
@@ -93,31 +110,51 @@ public class MainActivity extends AppCompatActivity
 
     public void fabComponent() {
 
+        float factor = getResources().getDisplayMetrics().density;
+
         FloatingActionButton fab = new FloatingActionButton.Builder(this)
 //                .setContentView(icon)
                 .setBackgroundDrawable(getDrawable(R.drawable.wheel))
-                .setLayoutParams(new FloatingActionButton.LayoutParams(800, 800))
+                .setLayoutParams(new FloatingActionButton.LayoutParams((int) (300 * factor), (int) (300 * factor)))
                 .build();
 
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 
+        itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_sub_button_gray));
+
         ImageView item1 = new ImageView(this);
-        item1.setImageResource(R.mipmap.ic_launcher);
+        item1.setImageResource(R.mipmap.write_ups);
 
         ImageView item2 = new ImageView(this);
-        item2.setImageResource(R.mipmap.ic_launcher);
+        item2.setImageResource(R.mipmap.calculator);
 
         ImageView item3 = new ImageView(this);
-        item3.setImageResource(R.mipmap.ic_launcher);
+        item3.setImageResource(R.mipmap.quick_check);
 
-        SubActionButton button1 = itemBuilder.setContentView(item1).build();
+        ImageView item4 = new ImageView(this);
+        item4.setImageResource(R.mipmap.create_profile);
+
+//        ImageView item5 = new ImageView(this);
+//        item5.setImageResource(R.mipmap.ic_launcher);
+
+        SubActionButton button1 = itemBuilder.setContentView(item1).setLayoutParams(new SubActionButton.LayoutParams(400, 400)).build();
         SubActionButton button2 = itemBuilder.setContentView(item2).build();
         SubActionButton button3 = itemBuilder.setContentView(item3).build();
+        SubActionButton button4 = itemBuilder.setContentView(item4).build();
+//        SubActionButton button5 = itemBuilder.setContentView(item5).build();
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                startCalculator();
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "button3", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FitmentActivity.class);
                 startActivity(intent);
             }
@@ -125,38 +162,60 @@ public class MainActivity extends AppCompatActivity
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
                 startActivity(intent);
             }
         });
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startCalculator();
-                Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
-                startActivity(intent);
+
             }
         });
 
         //attach the sub buttons
         new FloatingActionMenu.Builder(this)
-                .setRadius(500)
+                .setRadius((int)(160*factor))
+                .setStartAngle(175)
+                .setEndAngle(280)
                 .addSubActionView(button1)
                 .addSubActionView(button2)
                 .addSubActionView(button3)
+                .addSubActionView(button4)
+//                .addSubActionView(button5)
                 .attachTo(fab)
                 .build();
 
-    }
+        Animation translate = new TranslateAnimation(Animation.ABSOLUTE, 800, Animation.ABSOLUTE, 100,Animation.ABSOLUTE,0, Animation.ABSOLUTE, 100);
+        translate.setDuration(2000);
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        RotateAnimation rotate = new RotateAnimation(180,0f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
+        rotate.setDuration(2000);
+        rotate.setRepeatCount(0);
+
+        final AnimationSet moveAnimation = new AnimationSet(true);
+        moveAnimation.addAnimation(rotate);
+        moveAnimation.addAnimation(translate);
+        moveAnimation.setFillAfter(true);
+        fab.setAnimation(moveAnimation);
+        moveAnimation.start();
+
+        moveAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                fab.callOnClick();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     @Override
@@ -201,8 +260,6 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

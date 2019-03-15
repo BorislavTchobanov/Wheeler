@@ -94,13 +94,14 @@ public class VehicleSearch {
         });
     }
 
-    private void makeFinalServiceCall(Call<List<Vehicle>> call) {
+    public void makeFinalServiceCall(Call<List<Vehicle>> call) {
         call.enqueue(new Callback<List<Vehicle>>() {
             @Override
             public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
                 progressDoalog.dismiss();
                 vehicleList = response.body();
 //                setupRecyclerView(recyclerView);
+                saveToProfile();
                 Log.i("TEST","SUCCESS!!! = " + vehicleList);
 
                 //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)

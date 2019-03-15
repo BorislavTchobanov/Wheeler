@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".FitmentActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context=".FitmentActivity">
 
     <TextView
         android:id="@+id/current_setup_label"
@@ -364,7 +363,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="TextViewkldjflksdjflksdjfosdjfjsdlklskdjfklsdjfsdjflsdlksdlkfj"
                 android:textColor="#000" />
 
             <TextView

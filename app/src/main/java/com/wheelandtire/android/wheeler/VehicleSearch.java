@@ -94,14 +94,14 @@ public class VehicleSearch {
         });
     }
 
-    public void makeFinalServiceCall(Call<List<Vehicle>> call) {
+    public void makeFinalServiceCall(Call<List<Vehicle>> call, String profileName) {
         call.enqueue(new Callback<List<Vehicle>>() {
             @Override
             public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
                 progressDoalog.dismiss();
                 vehicleList = response.body();
 //                setupRecyclerView(recyclerView);
-                saveToProfile();
+                saveToProfile(profileName);
                 Log.i("TEST","SUCCESS!!! = " + vehicleList);
 
                 //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
@@ -116,8 +116,8 @@ public class VehicleSearch {
         });
     }
 
-    public void saveToProfile() {
-        String profileName = "ProfileTest";
+    public void saveToProfile(String profileName) {
+//        String profileName = "ProfileTest";
         String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
         String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
         String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());
@@ -129,6 +129,11 @@ public class VehicleSearch {
         vehicleProfileDatabase = VehicleProfileDatabase.getInstance(context.getApplicationContext());
         AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
                 .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
+
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("profile_name_key", profileName);
+        editor.apply();
     }
 
     public List<Vehicle> getVehicleList() {

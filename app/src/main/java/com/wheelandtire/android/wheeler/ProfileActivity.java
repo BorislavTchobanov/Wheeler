@@ -68,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
         return true;
     }
 
@@ -83,7 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
                     vehicleSearch.getYear(), vehicleSearch.getTrim());
-            vehicleSearch.makeFinalServiceCall(call);
+            EditText editText = findViewById(R.id.profileName);
+            vehicleSearch.makeFinalServiceCall(call, editText.getText().toString());
 //            vehicleSearch.saveToProfile();
             return true;
         }

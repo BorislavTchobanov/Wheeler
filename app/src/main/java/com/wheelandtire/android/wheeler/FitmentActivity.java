@@ -1,6 +1,5 @@
 package com.wheelandtire.android.wheeler;
 
-import android.app.ProgressDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,22 +13,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
 import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
-import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
 import com.wheelandtire.android.wheeler.model.Vehicle;
-import com.wheelandtire.android.wheeler.model.VehicleMake;
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
 import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,7 +119,7 @@ public class FitmentActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
         return true;
     }
 

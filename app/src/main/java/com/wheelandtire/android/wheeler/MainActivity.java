@@ -2,17 +2,21 @@ package com.wheelandtire.android.wheeler;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
@@ -23,11 +27,9 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 //import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
-import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FitmentAdapter.ListItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
 
     private InterstitialAd interstitialAd;
@@ -111,27 +113,48 @@ public class MainActivity extends AppCompatActivity
 
         itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.fab_sub_button_nobackground));
 
-        ImageView item1 = new ImageView(this);
-        item1.setImageResource(R.mipmap.write_ups);
+//        ImageView item1 = new ImageView(this);
+//        item1.setImageResource(R.drawable.ic_write_ups);
+//
+//        ImageView item2 = new ImageView(this);
+//        item2.setImageResource(R.drawable.ic_calculator);
 
-        ImageView item2 = new ImageView(this);
-        item2.setImageResource(R.mipmap.calculator);
+//        ImageView item3 = new ImageView(this);
+//        item3.setImageResource(R.drawable.ic_fitment);
 
-        ImageView item3 = new ImageView(this);
-        item3.setImageResource(R.mipmap.quick_check);
-
-        ImageView item4 = new ImageView(this);
-        item4.setImageResource(R.mipmap.create_profile);
+//        ImageView item4 = new ImageView(this);
+//        item4.setImageResource(R.drawable.ic_vehicle_profile);
 
 //        ImageView item5 = new ImageView(this);
 //        item5.setImageResource(R.mipmap.ic_launcher);
 
-        SubActionButton button1 = itemBuilder.setContentView(item1).setLayoutParams(new SubActionButton.LayoutParams(400, 400)).build();
+        TextView item4 = new TextView(this);
+        item4.setText("Profile");
+        item4.setGravity(Gravity.CENTER_HORIZONTAL);
+        item4.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_vehicle_profile), null, null);
+
+        TextView item3 = new TextView(this);
+        item3.setText("Sizes");
+        item3.setGravity(Gravity.CENTER_HORIZONTAL);
+        item3.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_fitment), null, null);
+
+        TextView item2 = new TextView(this);
+        item2.setText("Fitment");
+        item2.setGravity(Gravity.CENTER_HORIZONTAL);
+        item2.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_calculator), null, null);
+
+        TextView item1 = new TextView(this);
+        item1.setText("Write-ups");
+        item1.setGravity(Gravity.CENTER_HORIZONTAL);
+        item1.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_write_ups), null, null);
+
+        SubActionButton button1 = itemBuilder.setContentView(item1).setLayoutParams(new SubActionButton.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)).build();
         SubActionButton button2 = itemBuilder.setContentView(item2).build();
         SubActionButton button3 = itemBuilder.setContentView(item3).build();
         SubActionButton button4 = itemBuilder.setContentView(item4).build();
-//        SubActionButton button5 = itemBuilder.setContentView(item5).build();
 
+
+//        SubActionButton button5 = itemBuilder.setContentView(item5).build();
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,9 +187,9 @@ public class MainActivity extends AppCompatActivity
 
         //attach the sub buttons
         new FloatingActionMenu.Builder(this)
-                .setRadius((int)(160*factor))
+                .setRadius((int)(165*factor))
                 .setStartAngle(175)
-                .setEndAngle(280)
+                .setEndAngle(283)
                 .addSubActionView(button1)
                 .addSubActionView(button2)
                 .addSubActionView(button3)
@@ -176,10 +199,10 @@ public class MainActivity extends AppCompatActivity
                 .build();
 
         Animation translate = new TranslateAnimation(Animation.ABSOLUTE, 800, Animation.ABSOLUTE, 100,Animation.ABSOLUTE,0, Animation.ABSOLUTE, 100);
-        translate.setDuration(2000);
+        translate.setDuration(1500);
 
         RotateAnimation rotate = new RotateAnimation(180,0f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-        rotate.setDuration(2000);
+        rotate.setDuration(1500);
         rotate.setRepeatCount(0);
 
         final AnimationSet moveAnimation = new AnimationSet(true);
@@ -207,53 +230,53 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        return true;
-    }
-
-    @Override
-    public void onListItemClick(int clickedItemIndex) {
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+//
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public void onListItemClick(int clickedItemIndex) {
+//
+//    }
 }

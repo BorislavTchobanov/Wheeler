@@ -3,12 +3,14 @@ package com.wheelandtire.android.wheeler;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -63,22 +65,28 @@ public class VehicleSearch {
 
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
 
-//        Call<List<VehicleMake>> call = service.getVehicleModel("bmw", "1998");
         Call<List<VehicleMake>> call = makeCall(1, null, null, null);
         List<VehicleMake> vehicleMakeList = getVehicleMakeList(PREF_VEHICLE_MAKES_LIST);
         if (vehicleMakeList == null) {
             makeInitialServiceCall(call, 2);
         } else {
             generateDropDownList(vehicleMakeList, 2);
+            dismissProgressDialog();
         }
 
+    }
+
+    public void dismissProgressDialog() {
+        if (progressDoalog != null) {
+            progressDoalog.dismiss();
+        }
     }
 
     private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
             public void onResponse(@NonNull Call<List<VehicleMake>> call, @NonNull Response<List<VehicleMake>> response) {
-                progressDoalog.dismiss();
+                dismissProgressDialog();
                 if (response.body() != null) {
                     if (nextCallNumber == 2) {
                         saveVehicleMakeList(response.body());
@@ -89,52 +97,59 @@ public class VehicleSearch {
 
             @Override
             public void onFailure(@NonNull Call<List<VehicleMake>> call, @NonNull Throwable t) {
-                progressDoalog.dismiss();
+                dismissProgressDialog();
             }
         });
     }
 
-    public void makeFinalServiceCall(Call<List<Vehicle>> call, String profileName) {
-        call.enqueue(new Callback<List<Vehicle>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
-                progressDoalog.dismiss();
-                vehicleList = response.body();
-//                setupRecyclerView(recyclerView);
-                saveToProfile(profileName);
-                Log.i("TEST","SUCCESS!!! = " + vehicleList);
-
-                //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
-                progressDoalog.dismiss();
-                Log.i("TEST","Something went wrong...Please try later! = " + t);
-            }
-        });
-    }
-
-    public void saveToProfile(String profileName) {
-//        String profileName = "ProfileTest";
-        String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
-        String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
-        String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());
-        String rimWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimWidth());
-        String rimOffset = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimOffset());
-
-        vehicleProfile = new VehicleProfile(0, profileName, make, model, year,
-                trim, tireWidth, tireHeight, rimAndTireDiameter, rimWidth, rimOffset, vehicleList);
-        vehicleProfileDatabase = VehicleProfileDatabase.getInstance(context.getApplicationContext());
-        AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
-                .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
-
-        SharedPreferences sharedpreferences = context.getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("profile_name_key", profileName);
-        editor.apply();
-    }
+//    public void makeFinalServiceCall(Call<List<Vehicle>> call, String profileName) {
+//        call.enqueue(new Callback<List<Vehicle>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
+//                if (progressDoalog != null) {
+//                    progressDoalog.dismiss();
+//                }
+//                vehicleList = response.body();
+////                setupRecyclerView(recyclerView);
+//                saveToProfile(profileName);
+//                Log.i("TEST","SUCCESS!!! = " + vehicleList);
+//
+//                //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
+//                progressDoalog.dismiss();
+//                Log.i("TEST","Something went wrong...Please try later! = " + t);
+//            }
+//        });
+//    }
+//
+//    private void checkRequiredFileds(String profileName) {
+//        if (profileName.isEmpty()) {
+//
+//        }
+//    }
+//
+//    public void saveToProfile(String profileName) {
+//        String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
+//        String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
+//        String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());
+//        String rimWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimWidth());
+//        String rimOffset = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimOffset());
+//
+//        vehicleProfile = new VehicleProfile(0, profileName, make, model, year,
+//                trim, tireWidth, tireHeight, rimAndTireDiameter, rimWidth, rimOffset, vehicleList);
+//        vehicleProfileDatabase = VehicleProfileDatabase.getInstance(context.getApplicationContext());
+//        AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
+//                .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
+//
+//        SharedPreferences sharedpreferences = context.getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedpreferences.edit();
+//        editor.putString("profile_name_key", profileName);
+//        editor.apply();
+//    }
 
     public List<Vehicle> getVehicleList() {
         return vehicleList;
@@ -156,13 +171,38 @@ public class VehicleSearch {
         return trim;
     }
 
+    private VehicleMake makeHint(int currentDropdown) {
+        VehicleMake makeHint = new VehicleMake();
+
+        switch (currentDropdown) {
+            case 1:
+                makeHint.setName("Make");
+                makeHint.setSlug("Make");
+                break;
+            case 2:
+                makeHint.setName("Model");
+                makeHint.setSlug("Model");
+                break;
+            case 3:
+                makeHint.setName("Year");
+                makeHint.setSlug("Year");
+                break;
+            case 4:
+                makeHint.setName("Trim");
+                makeHint.setSlug("Trim");
+                break;
+            default:
+                makeHint.setName("Make");
+                makeHint.setSlug("Make");
+        }
+        return makeHint;
+    }
+
     private void generateDropDownList(List<VehicleMake> vehicleMakeList,
                                       int nextCallNumber) {
 
-        VehicleMake makeHint = new VehicleMake();
-        makeHint.setName("Make");
-        makeHint.setSlug("Make");
-        vehicleMakeList.add(0, makeHint);
+
+        vehicleMakeList.add(0, makeHint(nextCallNumber - 1));
 
         final CustomAdapter dataAdapter = new CustomAdapter(context, android.R.layout.simple_spinner_item, vehicleMakeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -227,6 +267,13 @@ public class VehicleSearch {
             default:
         }
         return call;
+    }
+
+    public void requiredFiled() {
+        TextView errorText = (TextView)spinner.getSelectedView();
+        errorText.setError("Required field!");
+        errorText.setTextColor(Color.RED);//just to highlight that this is an error
+        errorText.setText("Required field!");
     }
 
     public void saveVehicleMakeList(List<VehicleMake> vehicleMakeList) {

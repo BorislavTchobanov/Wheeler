@@ -7,4 +7,5 @@
     <string name="action_save">Save</string>
     <string name="spinner_title">Vehicle Make</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="vehicle_profile_title">Vehicle Profile</string>
 </resources>

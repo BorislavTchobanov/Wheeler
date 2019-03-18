@@ -1,14 +1,20 @@
 package com.wheelandtire.android.wheeler;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
 import com.wheelandtire.android.wheeler.model.Vehicle;
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
 import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
@@ -17,6 +23,8 @@ import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -24,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     private VehicleViewModel viewModel;
     private VehicleSearch vehicleSearch;
     private WheelSizeService service;
+    private EditText profileNameTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +40,20 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle(R.string.vehicle_profile_title);
 
-        ImageView image = findViewById(R.id.profileImage);
-        image.setImageDrawable(getDrawable(R.drawable.test_image));
+        profileNameTv = findViewById(R.id.profileName);
+        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
+        if (!profileName.equals("notfound")) {
+            profileNameTv.setText(profileName);
+        }
+
         viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
 
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
         vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
-        retrieveVehicleProfile();
+//        retrieveVehicleProfile();
 //        testRetrofit();
     }
 
@@ -83,13 +98,78 @@ public class ProfileActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
                     vehicleSearch.getYear(), vehicleSearch.getTrim());
-            EditText editText = findViewById(R.id.profileName);
-            vehicleSearch.makeFinalServiceCall(call, editText.getText().toString());
+
+            makeFinalServiceCall(call, profileNameTv.getText().toString());
 //            vehicleSearch.saveToProfile();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private List<Vehicle> vehicleList;
+
+
+    public void makeFinalServiceCall(Call<List<Vehicle>> call, String profileName) {
+        call.enqueue(new Callback<List<Vehicle>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
+//                if (progressDoalog != null) {
+//                    progressDoalog.dismiss();
+//                }
+                vehicleList = response.body();
+//                setupRecyclerView(recyclerView);
+                saveToProfile(profileName);
+                Log.i("TEST","SUCCESS!!! = " + vehicleList);
+
+                //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
+//                progressDoalog.dismiss();
+                Log.i("TEST","Something went wrong...Please try later! = " + t);
+            }
+        });
+    }
+
+    private boolean checkRequiredFileds(String profileName) {
+        if (profileName.isEmpty()) {
+            profileNameTv.setError("Profile Name is required!");
+            return false;
+        }
+        if (vehicleList == null) {
+            vehicleSearch.requiredFiled();
+            return false;
+        }
+
+        return true;
+    }
+
+    public void saveToProfile(String profileName) {
+        if(!checkRequiredFileds(profileName)) {
+            return;
+        }
+        String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
+        String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
+        String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());
+        String rimWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimWidth());
+        String rimOffset = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimOffset());
+
+        VehicleProfile vehicleProfile = new VehicleProfile(0, profileName,
+                vehicleSearch.getMake(),
+                vehicleSearch.getModel(),
+                vehicleSearch.getYear(),
+                vehicleSearch.getTrim(), tireWidth, tireHeight, rimAndTireDiameter, rimWidth, rimOffset, vehicleList);
+        VehicleProfileDatabase vehicleProfileDatabase = VehicleProfileDatabase.getInstance(getApplicationContext());
+        AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
+                .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
+
+        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("profile_name_key", profileName);
+        editor.apply();
     }
 
 }

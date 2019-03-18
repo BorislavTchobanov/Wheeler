@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:src="@drawable/profile_vehicle"
         />
 
     <EditText
@@ -22,8 +23,10 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:hint="Profile Name"
+        android:maxLength="16"
         android:inputType="textPersonName"
-        android:layout_marginBottom="20dp"
+        android:imeOptions="actionDone"
+        android:layout_marginBottom="10dp"
         android:drawableStart="@drawable/ic_menu_manage"/>
 
     <Spinner
@@ -57,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <EditText

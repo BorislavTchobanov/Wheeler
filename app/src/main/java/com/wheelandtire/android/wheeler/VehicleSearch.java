@@ -83,6 +83,7 @@ public class VehicleSearch {
     }
 
     private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
+        progressDoalog.show();
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
             public void onResponse(@NonNull Call<List<VehicleMake>> call, @NonNull Response<List<VehicleMake>> response) {

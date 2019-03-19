@@ -82,7 +82,7 @@ public class FitmentActivity extends AppCompatActivity
                 Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
                         vehicleSearch.getYear(), vehicleSearch.getTrim());
                 makeFinalServiceCall(call);
-                setupRecyclerView(recyclerView);
+//                setupRecyclerView(recyclerView);
             }
         });
 
@@ -93,7 +93,7 @@ public class FitmentActivity extends AppCompatActivity
             @Override
             public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
                 vehicleList = response.body();
-//                setupRecyclerView(recyclerView);
+                setupRecyclerView(recyclerView);
                 Log.i("TEST","SUCCESS!!! = " + vehicleList);
             }
 

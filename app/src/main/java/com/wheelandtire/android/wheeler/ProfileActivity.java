@@ -40,20 +40,21 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.vehicle_profile_title);
 
         profileNameTv = findViewById(R.id.profileName);
-        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
-        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
-        if (!profileName.equals("notfound")) {
-            profileNameTv.setText(profileName);
-        }
+//        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+//        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
+//        if (!profileName.equals("notfound")) {
+//            profileNameTv.setText(profileName);
+//        }
 
         viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
 
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
         vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
-//        retrieveVehicleProfile();
+        retrieveVehicleProfile();
 //        testRetrofit();
     }
 
@@ -70,6 +71,9 @@ public class ProfileActivity extends AppCompatActivity {
         EditText tireDiameter = findViewById(R.id.tireDiameterView);
 
         if (vehicleProfile != null) {
+
+            vehicleSearch.populateVehicleSpinners(vehicleProfile);
+            profileNameTv.setText(vehicleProfile.getProfileName());
             String tireAndRimDiameter = vehicleProfile.getProfileTireAndRimDiameter();
             rimDiameter.setText(tireAndRimDiameter);
             rimWidth.setText(vehicleProfile.getProfileRimWidth());
@@ -92,16 +96,29 @@ public class ProfileActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+//                    vehicleSearch.getYear(), vehicleSearch.getTrim());
+//
+//            makeFinalServiceCall(call, profileNameTv.getText().toString());
+////            vehicleSearch.saveToProfile();
+//            return true;
+//        }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
-                    vehicleSearch.getYear(), vehicleSearch.getTrim());
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_settings:
+                Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                        vehicleSearch.getYear(), vehicleSearch.getTrim());
 
-            makeFinalServiceCall(call, profileNameTv.getText().toString());
+                makeFinalServiceCall(call, profileNameTv.getText().toString());
 //            vehicleSearch.saveToProfile();
-            return true;
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -119,7 +136,9 @@ public class ProfileActivity extends AppCompatActivity {
 //                }
                 vehicleList = response.body();
 //                setupRecyclerView(recyclerView);
-                saveToProfile(profileName);
+                if (!vehicleList.isEmpty()) {
+                    saveToProfile(profileName);
+                }
                 Log.i("TEST","SUCCESS!!! = " + vehicleList);
 
                 //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)

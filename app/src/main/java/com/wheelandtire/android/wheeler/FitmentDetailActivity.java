@@ -5,8 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import com.wheelandtire.android.wheeler.model.Vehicle;
+import com.wheelandtire.android.wheeler.utility.ImageHandler;
+
+import java.util.Random;
 
 import static com.wheelandtire.android.wheeler.FitmentActivity.EXTRA_VEHICLE;
 
@@ -22,10 +26,19 @@ public class FitmentDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fitment_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Fitment List");
 
         vehicle = (Vehicle) getIntent().getSerializableExtra(EXTRA_VEHICLE);
 //        trimIndex = getIntent().getIntExtra(EXTRA_CURRENT_STEP_INDEX, 0);
+
+        int vehicleImagesListSize = vehicle.getGeneration().getBodies().size();
+        String vehicleImageUrl = vehicle.getGeneration().getBodies()
+                .get(new Random().nextInt(vehicleImagesListSize))
+                .getImage();
+
+        ImageView vehicleImage = findViewById(R.id.vehicleBodyIv);
+        ImageHandler.loadImage(vehicleImageUrl, vehicleImage);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

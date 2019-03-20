@@ -25,6 +25,7 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarCalculator);
 //        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Calculator");
 
         viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);

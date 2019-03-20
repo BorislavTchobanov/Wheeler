@@ -46,6 +46,8 @@ public class FitmentActivity extends AppCompatActivity
         setContentView(R.layout.activity_fitment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Wheel&Tire");
 
         goButton = findViewById(R.id.goButton);
 

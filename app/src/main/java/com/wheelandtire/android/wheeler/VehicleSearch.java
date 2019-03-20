@@ -47,12 +47,13 @@ public class VehicleSearch {
     private String model;
     private String year;
     private String trim;
-    private List<Vehicle> vehicleList;
+    private List<VehicleMake> vehicleList;
     private Spinner spinner;
     private VehicleProfileDatabase vehicleProfileDatabase;
     private View rootView;
     private int numOfDropDowns;
-    private VehicleProfile vehicleProfile;
+    List<VehicleMake> vehicleMakeList;
+//    private VehicleProfile vehicleProfile;
 
     public VehicleSearch(final Context context, View rootView, int numOfDropDowns){
 
@@ -66,7 +67,7 @@ public class VehicleSearch {
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
 
         Call<List<VehicleMake>> call = makeCall(1, null, null, null);
-        List<VehicleMake> vehicleMakeList = getVehicleMakeList(PREF_VEHICLE_MAKES_LIST);
+        vehicleMakeList = getVehicleMakeList(PREF_VEHICLE_MAKES_LIST);
         if (vehicleMakeList == null) {
             makeInitialServiceCall(call, 2);
         } else {
@@ -82,6 +83,21 @@ public class VehicleSearch {
         }
     }
 
+    public void populateVehicleSpinners(VehicleProfile vehicleProfile) {
+        if (vehicleProfile == null) {
+            return;
+        }
+        Spinner spinnerMake = rootView.findViewById(R.id.spinnerMake);
+        Spinner spinnerModel = rootView.findViewById(R.id.spinnerModel);
+        Spinner spinnerYear = rootView.findViewById(R.id.spinnerYear);
+        Spinner spinnerTrim = rootView.findViewById(R.id.spinnerTrim);
+
+        spinnerMake.setSelection(vehicleMakeList.indexOf());
+        spinnerModel.setSelection(vehicleList.indexOf(vehicleProfile.getProfileModel()));
+        spinnerYear.setSelection(vehicleList.indexOf(vehicleProfile.getProfileYear()));
+        spinnerTrim.setSelection(vehicleList.indexOf(vehicleProfile.getProfileTrim()));
+    }
+
     private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
         progressDoalog.show();
         call.enqueue(new Callback<List<VehicleMake>>() {
@@ -92,7 +108,8 @@ public class VehicleSearch {
                     if (nextCallNumber == 2) {
                         saveVehicleMakeList(response.body());
                     }
-                    generateDropDownList(response.body(), nextCallNumber);
+                    vehicleList = response.body();
+                    generateDropDownList(vehicleList, nextCallNumber);
                 }
             }
 
@@ -152,9 +169,9 @@ public class VehicleSearch {
 //        editor.apply();
 //    }
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
-    }
+//    public List<Vehicle> getVehicleList() {
+//        return vehicleList;
+//    }
 
     public String getMake() {
         return make;

@@ -7,6 +7,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,20 +45,16 @@ public class FitmentDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fitment_detail_view, container, false);
 
-
+//        if (getActivity() instanceof FitmentDetailActivity) {
+//            ((FitmentDetailActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
 
         assert getArguments() != null;
         if (getArguments().containsKey(EXTRA_VEHICLE)) {
             vehicle = (Vehicle) getArguments().getSerializable(EXTRA_VEHICLE);
             if (vehicle != null) {
 
-                int vehicleImagesListSize = vehicle.getGeneration().getBodies().size();
-                String vehicleImageUrl = vehicle.getGeneration().getBodies()
-                        .get(new Random().nextInt(vehicleImagesListSize))
-                        .getImage();
 
-                ImageView vehicleImage = rootView.findViewById(R.id.vehicleBodyIv);
-                ImageHandler.loadImage(vehicleImageUrl, vehicleImage);
 
                 RecyclerView recyclerView = rootView.findViewById(R.id.fitmentDetailRecyclerView);
 

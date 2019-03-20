@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
         item4.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_vehicle_profile), null, null);
 
         TextView item3 = new TextView(this);
-        item3.setText("Sizes");
+        item3.setText("Wheel&Tire");
         item3.setGravity(Gravity.CENTER_HORIZONTAL);
         item3.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_fitment), null, null);
 
         TextView item2 = new TextView(this);
-        item2.setText("Fitment");
+        item2.setText("Fitment\nCalculator");
         item2.setGravity(Gravity.CENTER_HORIZONTAL);
         item2.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_calculator), null, null);
 
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         //attach the sub buttons
         new FloatingActionMenu.Builder(this)
-                .setRadius((int)(165*factor))
+                .setRadius((int)(170*factor))
                 .setStartAngle(175)
                 .setEndAngle(283)
                 .addSubActionView(button1)

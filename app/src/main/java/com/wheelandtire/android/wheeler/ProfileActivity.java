@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (vehicleProfile != null) {
 
-            vehicleSearch.populateVehicleSpinners(vehicleProfile);
+//            vehicleSearch.populateVehicleSpinners(vehicleProfile);
             profileNameTv.setText(vehicleProfile.getProfileName());
             String tireAndRimDiameter = vehicleProfile.getProfileTireAndRimDiameter();
             rimDiameter.setText(tireAndRimDiameter);
@@ -113,11 +113,14 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.action_settings:
-                Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
-                        vehicleSearch.getYear(), vehicleSearch.getTrim());
+                if(!checkRequiredFileds(profileNameTv.getText().toString())) {
+                    break;
+                } else {
+                    Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                            vehicleSearch.getYear(), vehicleSearch.getTrim());
 
-                makeFinalServiceCall(call, profileNameTv.getText().toString());
-//            vehicleSearch.saveToProfile();
+                    makeFinalServiceCall(call, profileNameTv.getText().toString());
+                }
                 break;
         }
 
@@ -135,10 +138,8 @@ public class ProfileActivity extends AppCompatActivity {
 //                    progressDoalog.dismiss();
 //                }
                 vehicleList = response.body();
-//                setupRecyclerView(recyclerView);
-                if (!vehicleList.isEmpty()) {
-                    saveToProfile(profileName);
-                }
+                saveToProfile(profileName);
+
                 Log.i("TEST","SUCCESS!!! = " + vehicleList);
 
                 //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
@@ -158,7 +159,7 @@ public class ProfileActivity extends AppCompatActivity {
             profileNameTv.setError("Profile Name is required!");
             return false;
         }
-        if (vehicleList == null) {
+        if (vehicleSearch.getMake() == null || vehicleSearch.getModel() == null || vehicleSearch.getYear() == null) {
             vehicleSearch.requiredFiled();
             return false;
         }
@@ -167,9 +168,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void saveToProfile(String profileName) {
-        if(!checkRequiredFileds(profileName)) {
-            return;
-        }
         String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
         String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
         String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());

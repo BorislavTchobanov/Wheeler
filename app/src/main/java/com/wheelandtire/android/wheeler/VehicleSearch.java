@@ -83,20 +83,20 @@ public class VehicleSearch {
         }
     }
 
-    public void populateVehicleSpinners(VehicleProfile vehicleProfile) {
-        if (vehicleProfile == null) {
-            return;
-        }
-        Spinner spinnerMake = rootView.findViewById(R.id.spinnerMake);
-        Spinner spinnerModel = rootView.findViewById(R.id.spinnerModel);
-        Spinner spinnerYear = rootView.findViewById(R.id.spinnerYear);
-        Spinner spinnerTrim = rootView.findViewById(R.id.spinnerTrim);
-
-        spinnerMake.setSelection(vehicleMakeList.indexOf());
-        spinnerModel.setSelection(vehicleList.indexOf(vehicleProfile.getProfileModel()));
-        spinnerYear.setSelection(vehicleList.indexOf(vehicleProfile.getProfileYear()));
-        spinnerTrim.setSelection(vehicleList.indexOf(vehicleProfile.getProfileTrim()));
-    }
+//    public void populateVehicleSpinners(VehicleProfile vehicleProfile) {
+//        if (vehicleProfile == null) {
+//            return;
+//        }
+//        Spinner spinnerMake = rootView.findViewById(R.id.spinnerMake);
+//        Spinner spinnerModel = rootView.findViewById(R.id.spinnerModel);
+//        Spinner spinnerYear = rootView.findViewById(R.id.spinnerYear);
+//        Spinner spinnerTrim = rootView.findViewById(R.id.spinnerTrim);
+//
+////        spinnerMake.setSelection(vehicleMakeList.indexOf());
+//        spinnerModel.setSelection(vehicleList.indexOf(vehicleProfile.getProfileModel()));
+//        spinnerYear.setSelection(vehicleList.indexOf(vehicleProfile.getProfileYear()));
+//        spinnerTrim.setSelection(vehicleList.indexOf(vehicleProfile.getProfileTrim()));
+//    }
 
     private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
         progressDoalog.show();

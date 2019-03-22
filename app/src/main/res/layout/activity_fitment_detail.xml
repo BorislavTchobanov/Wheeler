@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:id="@+id/toolbar_container"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:theme="@style/MyActionBar.ProfileMenuStyle"
         android:elevation="@dimen/appbar_elevation"
         android:fitsSystemWindows="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,5 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

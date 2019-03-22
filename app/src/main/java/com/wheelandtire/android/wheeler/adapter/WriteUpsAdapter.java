@@ -15,10 +15,12 @@ import java.util.List;
 
 public class WriteUpsAdapter extends RecyclerView.Adapter<WriteUpsAdapter.WriteUpsViewHolder> {
 
-    private List<Wheel> wheelList;
+    private List<String> titleList;
+    private List<String> contentList;
 
-    public WriteUpsAdapter(List<Wheel> wheelList) {
-        this.wheelList = wheelList;
+    public WriteUpsAdapter(List<String> titleList, List<String> contentList) {
+        this.titleList = titleList;
+        this.contentList = contentList;
     }
 
     @NonNull
@@ -36,37 +38,19 @@ public class WriteUpsAdapter extends RecyclerView.Adapter<WriteUpsAdapter.WriteU
 
     @Override
     public void onBindViewHolder(@NonNull WriteUpsViewHolder writeUpsViewHolder, int position) {
-        Wheel wheel = wheelList.get(position);
-
-        String tireSizeFront = wheel.getFront().getTire();
-        String tireSizeRear = wheel.getRear().getTire();
-        String tireSize = tireSizeRear != null && !tireSizeRear.isEmpty() ?
-                tireSizeFront.concat("\n Rear: \n" + tireSizeRear) : tireSizeFront;
-        writeUpsViewHolder.setHeadlineTv(tireSize);
-
-        String rimSizeFront = wheel.getFront().getRim();
-        String rimSizeRear = wheel.getRear().getRim();
-        String rimSize = rimSizeRear != null && !rimSizeRear.isEmpty() ?
-                rimSizeFront.concat("\n Rear: \n" + rimSizeRear) : rimSizeFront;
-        writeUpsViewHolder.setContentTv(rimSize);
 
 
-        String tirePressureFront = (wheel.getFront().getTirePressure()) != null ?
-                String.valueOf(wheel.getFront().getTirePressure().getBar()) : "";
-        String tirePressureRear = (wheel.getRear().getTirePressure()) != null ?
-                String.valueOf(wheel.getRear().getTirePressure().getBar()) : "";
-        String tirePressure = tirePressureRear.isEmpty() ?
-                tirePressureFront : tirePressureFront.concat("/" + tirePressureRear);
-        writeUpsViewHolder.setTirePressureFront(tirePressure);
+        writeUpsViewHolder.setHeadlineTv(titleList.get(position));
+        writeUpsViewHolder.setContentTv(contentList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (wheelList == null) {
+        if (titleList == null) {
             return 0;
         }
 
-        return wheelList.size();
+        return titleList.size();
     }
 
     class WriteUpsViewHolder extends RecyclerView.ViewHolder {

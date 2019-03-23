@@ -7,22 +7,14 @@ import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wheelandtire.android.wheeler.databinding.ActivityCalculatorBinding;
-import com.wheelandtire.android.wheeler.databinding.ContentCalculatorBinding;
-import com.wheelandtire.android.wheeler.model.Vehicle;
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
-
-import java.util.List;
-
-import retrofit2.Call;
 
 
 public class CalculatorActivity extends AppCompatActivity {
@@ -67,6 +59,11 @@ public class CalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calculateRimDiameter();
+                calculateRimWidth();
+                calculateOffset();
+                calculateTireWidth();
+                calculateTireSidewall();
+                calculateOverallDiameterAndSpeedo();
             }
         });
     }
@@ -98,30 +95,147 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private int convertInchToMm(EditText currentView) {
         int currRimDiamInches = Integer.parseInt(currentView.getText().toString());
-        return (int) (currRimDiamInches * 25.4 + .5f);
+        return (int) Math.round(currRimDiamInches * 25.4);
     }
 
-    private float calculateDifferencePercentage(int currentSize, int newSize) {
+    private void calculateDifferencePercentage(int currentSize, int newSize, TextView textView) {
         float diff = currentSize - newSize;
-        return diff / currentSize * 100;
+        int diffPercentage = Math.round(diff / currentSize * 100);
+
+        String diffRimOffset = addUnitOfMeasure(String.valueOf(Math.abs(diffPercentage)), true);
+        textView.setCompoundDrawablesWithIntrinsicBounds(getArrowDrawable(diffPercentage), null, null, null);
+        textView.setText(diffRimOffset);
+    }
+
+    private Drawable getArrowDrawable(int diff) {
+        return diff > 0 ? getDrawable(R.drawable.ic_decrease) : getDrawable(R.drawable.ic_increase);
     }
 
     private void calculateRimDiameter() {
-        int currentRimDiameterSize = convertInchToMm(binding.included.rimDiameterView);
-        int newRimDiameterSize = convertInchToMm(binding.included.rimDiameterViewNew);
+        int currentRimDiameterSize = 0;
+        int newRimDiameterSize = 0;
+        try {
+            currentRimDiameterSize = convertInchToMm(binding.included.rimDiameterView);
+            newRimDiameterSize = convertInchToMm(binding.included.rimDiameterViewNew);
+        } catch (NumberFormatException e) {}
+
         String currentRimDiameterText = addUnitOfMeasure(String.valueOf(currentRimDiameterSize), false);
         String newRimDiameterText = addUnitOfMeasure(String.valueOf(newRimDiameterSize), false);
         binding.included.rimDiameterCurrentTv.setText(currentRimDiameterText);
         binding.included.rimDiameterNewTv.setText(newRimDiameterText);
 
-        int diff = (int) calculateDifferencePercentage(currentRimDiameterSize, newRimDiameterSize);
-        Drawable arrow = diff > 0 ? getDrawable(R.drawable.ic_decrease) : getDrawable(R.drawable.ic_increase);
-
-        String diffRimDiameter = addUnitOfMeasure(String.valueOf(Math.abs(diff)), true);
-        binding.included.rimDiameterDiffTv.setCompoundDrawablesWithIntrinsicBounds(arrow, null, null, null);
-        binding.included.rimDiameterDiffTv.setText(diffRimDiameter);
+        calculateDifferencePercentage(currentRimDiameterSize, newRimDiameterSize, binding.included.rimDiameterDiffTv);
     }
     private void calculateRimWidth() {
+        int currentRimWidthSize = 0;
+        int newRimWidthSize = 0;
+        try {
+            currentRimWidthSize = convertInchToMm(binding.included.rimWidthView);
+            newRimWidthSize = convertInchToMm(binding.included.rimWidthViewNew);
+        } catch (NumberFormatException e) {}
 
+        String currentRimWidthText = addUnitOfMeasure(String.valueOf(currentRimWidthSize), false);
+        String newRimWidthText = addUnitOfMeasure(String.valueOf(newRimWidthSize), false);
+        binding.included.rimWidthCurrentTv.setText(currentRimWidthText);
+        binding.included.rimWidthNewTv.setText(newRimWidthText);
+
+        calculateDifferencePercentage(currentRimWidthSize, newRimWidthSize, binding.included.rimWidthDiffTv);
+    }
+
+    private void calculateOffset() {
+        int currentOffsetSize = 0;
+        int newOffsetSize = 0;
+        try {
+            currentOffsetSize = Integer.parseInt(binding.included.rimOffsetView.getText().toString());
+            newOffsetSize = Integer.parseInt(binding.included.rimOffsetViewNew.getText().toString());
+        } catch (NumberFormatException e) {}
+
+        String currentOffset = addUnitOfMeasure(String.valueOf(currentOffsetSize), false);
+        String newOffset = addUnitOfMeasure(String.valueOf(newOffsetSize), false);
+        binding.included.offsetCurrentTv.setText(currentOffset);
+        binding.included.offsetNewTv.setText(newOffset);
+
+        calculateDifferencePercentage(currentOffsetSize, newOffsetSize, binding.included.offsetDiffTv);
+    }
+
+    private void calculateTireWidth() {
+        int currentTireWidthSize = 0;
+        int newTireWidthSize = 0;
+        try {
+            currentTireWidthSize = Integer.parseInt(binding.included.tireWidthView.getText().toString());
+            newTireWidthSize = Integer.parseInt(binding.included.tireWidthViewNew.getText().toString());
+        } catch (NumberFormatException e) {}
+
+        String currentTireWidth = addUnitOfMeasure(String.valueOf(currentTireWidthSize), false);
+        String newTireWidth = addUnitOfMeasure(String.valueOf(newTireWidthSize), false);
+        binding.included.tireWidthCurrentTv.setText(currentTireWidth);
+        binding.included.tireWidthNewTv.setText(newTireWidth);
+
+        calculateDifferencePercentage(currentTireWidthSize, newTireWidthSize, binding.included.tireWidthDiffTv);
+    }
+
+    private void calculateTireSidewall() {
+        int currentTireWidthSize = 0;
+        int newTireWidthSize = 0;
+        int currentTireHeightSize = 0;
+        int newTireHeightSize = 0;
+        try {
+            currentTireWidthSize = Integer.parseInt(binding.included.tireWidthView.getText().toString());
+            newTireWidthSize = Integer.parseInt(binding.included.tireWidthViewNew.getText().toString());
+            currentTireHeightSize = Integer.parseInt(binding.included.tireHeightView.getText().toString());
+            newTireHeightSize = Integer.parseInt(binding.included.tireHeightViewNew.getText().toString());
+        } catch (NumberFormatException e) {}
+
+        int sidewallCalculationCurrent = Math.round((float)currentTireHeightSize / 100 * currentTireWidthSize);
+        int sidewallCalculationNew = Math.round((float)newTireHeightSize / 100 * newTireWidthSize);
+        String currentTireHeight = addUnitOfMeasure(String.valueOf(sidewallCalculationCurrent), false);
+        String newTireHeight = addUnitOfMeasure(String.valueOf(sidewallCalculationNew), false);
+
+        binding.included.sidewallCurrentTv.setText(currentTireHeight);
+        binding.included.sidewallNewTv.setText(newTireHeight);
+
+        calculateDifferencePercentage(sidewallCalculationCurrent, sidewallCalculationNew, binding.included.sidewallDiffTv);
+    }
+
+    private void calculateOverallDiameterAndSpeedo() {
+        int currentTireWidthSize = 0;
+        int newTireWidthSize = 0;
+        int currentTireHeightSize = 0;
+        int newTireHeightSize = 0;
+        int currentRimDiameterSize = 0;
+        int newRimDiameterSize = 0;
+        try {
+            currentTireWidthSize = Integer.parseInt(binding.included.tireWidthView.getText().toString());
+            newTireWidthSize = Integer.parseInt(binding.included.tireWidthViewNew.getText().toString());
+            currentTireHeightSize = Integer.parseInt(binding.included.tireHeightView.getText().toString());
+            newTireHeightSize = Integer.parseInt(binding.included.tireHeightViewNew.getText().toString());
+            currentRimDiameterSize = convertInchToMm(binding.included.rimDiameterView);
+            newRimDiameterSize = convertInchToMm(binding.included.rimDiameterViewNew);
+        } catch (NumberFormatException e) {}
+
+        int sidewallCalculationCurrent = Math.round((float)currentTireHeightSize / 100 * currentTireWidthSize);
+        int sidewallCalculationNew = Math.round((float)newTireHeightSize / 100 * newTireWidthSize);
+
+        int overallDiameterCurrentSize = sidewallCalculationCurrent * 2 + currentRimDiameterSize;
+        int overallDiameterNewSize = sidewallCalculationNew * 2 + newRimDiameterSize;
+
+        String currentOverallDiameter = addUnitOfMeasure(String.valueOf(overallDiameterCurrentSize), false);
+        String newOverallDiameter = addUnitOfMeasure(String.valueOf(overallDiameterNewSize), false);
+
+        binding.included.overallDiameterCurrentTv.setText(currentOverallDiameter);
+        binding.included.overallDiameterNewTv.setText(newOverallDiameter);
+
+        double diff = overallDiameterCurrentSize - overallDiameterNewSize;
+        if (overallDiameterCurrentSize == 0) {
+            overallDiameterCurrentSize = 1;
+        }
+        double diffPercentage = Math.round(diff / overallDiameterCurrentSize * 100 * 10) / 10.0;
+
+        String diffOverallDiameter = addUnitOfMeasure(String.valueOf(Math.abs(diffPercentage)), true);
+        binding.included.overallDiameterDiffTv.setCompoundDrawablesWithIntrinsicBounds(getArrowDrawable((int) diffPercentage), null, null, null);
+        binding.included.overallDiameterDiffTv.setText(diffOverallDiameter);
+
+        String newSpeedometerReading = String.valueOf( Math.round((float)overallDiameterNewSize / overallDiameterCurrentSize * 60));
+        binding.included.speedometerNewTv.setText("When speedometer reads 60km/h actual speed will be " + newSpeedometerReading + "km/h");
     }
 }

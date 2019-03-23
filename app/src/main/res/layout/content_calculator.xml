@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data/>
+
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:focusableInTouchMode="true"
     tools:context=".FitmentActivity">
 
     <TextView
@@ -65,13 +69,13 @@
         android:layout_margin="10dp"
         android:text="R"
         app:layout_constraintBottom_toBottomOf="@id/tireHeightView"
-        app:layout_constraintEnd_toStartOf="@id/tireDiameterView"
+        app:layout_constraintEnd_toStartOf="@id/rimDiameterView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/tireHeightView"
         app:layout_constraintTop_toTopOf="@id/tireHeightView" />
 
     <EditText
-        android:id="@+id/tireDiameterView"
+        android:id="@+id/rimDiameterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:digits="0123456789"
@@ -89,11 +93,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="X"
-        app:layout_constraintBottom_toBottomOf="@id/tireDiameterView"
+        app:layout_constraintBottom_toBottomOf="@id/rimDiameterView"
         app:layout_constraintEnd_toStartOf="@id/rimWidthView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireDiameterView"
-        app:layout_constraintTop_toTopOf="@id/tireDiameterView" />
+        app:layout_constraintStart_toEndOf="@id/rimDiameterView"
+        app:layout_constraintTop_toTopOf="@id/rimDiameterView" />
 
     <EditText
         android:id="@+id/rimWidthView"
@@ -204,13 +208,13 @@
         android:layout_margin="10dp"
         android:text="R"
         app:layout_constraintBottom_toBottomOf="@id/tireHeightViewNew"
-        app:layout_constraintEnd_toStartOf="@id/tireDiameterViewNew"
+        app:layout_constraintEnd_toStartOf="@id/rimDiameterViewNew"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/tireHeightViewNew"
         app:layout_constraintTop_toTopOf="@id/tireHeightViewNew" />
 
     <EditText
-        android:id="@+id/tireDiameterViewNew"
+        android:id="@+id/rimDiameterViewNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:digits="0123456789"
@@ -228,11 +232,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="X"
-        app:layout_constraintBottom_toBottomOf="@id/tireDiameterViewNew"
+        app:layout_constraintBottom_toBottomOf="@id/rimDiameterViewNew"
         app:layout_constraintEnd_toStartOf="@id/rimWidthViewNew"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireDiameterViewNew"
-        app:layout_constraintTop_toTopOf="@id/tireDiameterViewNew" />
+        app:layout_constraintStart_toEndOf="@id/rimDiameterViewNew"
+        app:layout_constraintTop_toTopOf="@id/rimDiameterViewNew" />
 
     <EditText
         android:id="@+id/rimWidthViewNew"
@@ -285,6 +289,15 @@
         app:layout_constraintStart_toEndOf="@id/current_setup_et_new"
         app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
 
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TableLayout
         android:id="@+id/calculator_table"
@@ -295,7 +308,7 @@
         android:measureWithLargestChild="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew">
+        app:layout_constraintTop_toBottomOf="@id/goButton">
         <!--Rims-->
         <TableRow
             android:id="@+id/table_row1"
@@ -306,7 +319,7 @@
                 android:id="@+id/row1_col1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
@@ -318,11 +331,11 @@
                 android:id="@+id/row1_col2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Rim 1 (16x7 ET 47)"
+                android:text="Current"
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -330,25 +343,37 @@
                 android:id="@+id/row1_col3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Rim 2 (17x8 ET 30)"
+                android:text="New"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row1_col4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Diff"
                 android:textColor="#000"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/table_row2"
+            android:id="@+id/table_rim_diameter_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row2_col1"
+                android:id="@+id/rim_diameter_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
@@ -356,38 +381,50 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row2_col2"
+                android:id="@+id/rim_diameter_current_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextViewkldjflksdjflksdjfosdjfjsdlklskdjfklsdjfsdjflsdlksdlkfj"
+                android:text="666"
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row2_col3"
+                android:id="@+id/rim_diameter_new_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="TextView"
                 android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/rim_diameter_diff_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:drawableStart="@drawable/ic_increase"
+                android:text="6%"
+                android:textColor="#000" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/table_row3"
+            android:id="@+id/table_rim_width_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row3_col1"
+                android:id="@+id/rim_width_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
@@ -395,10 +432,10 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row3_col2"
+                android:id="@+id/rim_width_current_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
@@ -406,66 +443,39 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row3_col3"
+                android:id="@+id/rim_width_new_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="TextView"
                 android:textColor="#000" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/table_row4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row4_col1"
+                android:id="@+id/rim_width_diff_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Backspace"
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/row4_col2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/row4_col3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
+                android:drawableStart="@drawable/ic_decrease"
+                android:text="16%"
                 android:textColor="#000" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/table_row5"
+            android:id="@+id/table_offset_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row5_col1"
+                android:id="@+id/offset_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
@@ -473,10 +483,21 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row5_col2"
+                android:id="@+id/offset_current_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="666"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/offset_new_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
@@ -484,70 +505,29 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row5_col3"
+                android:id="@+id/offset_diff_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextView"
+                android:drawableStart="@drawable/ic_increase"
+                android:text="6%"
                 android:textColor="#000" />
         </TableRow>
 
         <!--Tires-->
         <TableRow
-            android:id="@+id/table_row6"
+            android:id="@+id/table_tire_width_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row6_col1"
+                android:id="@+id/tire_width_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Tires"
-                android:textColor="#000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/row6_col2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/row6_col3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/table_row7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/row7_col1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
@@ -555,10 +535,21 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row7_col2"
+                android:id="@+id/tire_width_current_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="666"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/tire_width_new_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
@@ -566,77 +557,101 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row7_col3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/table_row8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/row8_col1"
+                android:id="@+id/tire_width_diff_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Sidewall"
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/row8_col2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/row8_col3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
+                android:drawableStart="@drawable/ic_increase"
+                android:text="6%"
                 android:textColor="#000" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/table_row9"
+            android:id="@+id/table_sidewall_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/row9_col1"
+                android:id="@+id/sidewall_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Tire Width"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/sidewall_current_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="666"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/sidewall_new_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/sidewall_diff_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:drawableStart="@drawable/ic_increase"
+                android:text="6%"
+                android:textColor="#000" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_overall_diameter_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/overall_diameter_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
                 android:gravity="center_vertical"
                 android:padding="5dp"
-                android:text="Overall Diameter"
+                android:text="Tire Width"
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row9_col2"
+                android:id="@+id/overall_diameter_current_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="666"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/overall_diameter_new_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
@@ -644,16 +659,57 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/row9_col3"
+                android:id="@+id/overall_diameter_diff_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="TextView"
+                android:drawableStart="@drawable/ic_increase"
+                android:text="6%"
+                android:textColor="#000" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_speedometer_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/speedometer_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Speedometer"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/speedometer_current_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Assuming OEM"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/speedometer_new_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:background="@drawable/cell_shape"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="When speedometer reads 60 km/h actual speed will be 57.3 km/h "
                 android:textColor="#000" />
         </TableRow>
     </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
+</layout>

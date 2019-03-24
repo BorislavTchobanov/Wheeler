@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
 import com.wheelandtire.android.wheeler.model.Vehicle;
@@ -134,7 +135,9 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
 //                progressDoalog.dismiss();
-                Log.i("TEST","Something went wrong...Please try later! = " + t);
+                Toast.makeText(ProfileActivity.this,
+                        "Oops! Something went wrong with the call to the server!",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

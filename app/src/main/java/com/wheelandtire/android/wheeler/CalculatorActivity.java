@@ -117,7 +117,8 @@ public class CalculatorActivity extends AppCompatActivity {
         try {
             currentRimDiameterSize = convertInchToMm(binding.included.rimDiameterView);
             newRimDiameterSize = convertInchToMm(binding.included.rimDiameterViewNew);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
         String currentRimDiameterText = addUnitOfMeasure(String.valueOf(currentRimDiameterSize), false);
         String newRimDiameterText = addUnitOfMeasure(String.valueOf(newRimDiameterSize), false);
@@ -126,13 +127,15 @@ public class CalculatorActivity extends AppCompatActivity {
 
         calculateDifferencePercentage(currentRimDiameterSize, newRimDiameterSize, binding.included.rimDiameterDiffTv);
     }
+
     private void calculateRimWidth() {
         int currentRimWidthSize = 0;
         int newRimWidthSize = 0;
         try {
             currentRimWidthSize = convertInchToMm(binding.included.rimWidthView);
             newRimWidthSize = convertInchToMm(binding.included.rimWidthViewNew);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
         String currentRimWidthText = addUnitOfMeasure(String.valueOf(currentRimWidthSize), false);
         String newRimWidthText = addUnitOfMeasure(String.valueOf(newRimWidthSize), false);
@@ -148,7 +151,8 @@ public class CalculatorActivity extends AppCompatActivity {
         try {
             currentOffsetSize = Integer.parseInt(binding.included.rimOffsetView.getText().toString());
             newOffsetSize = Integer.parseInt(binding.included.rimOffsetViewNew.getText().toString());
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
         String currentOffset = addUnitOfMeasure(String.valueOf(currentOffsetSize), false);
         String newOffset = addUnitOfMeasure(String.valueOf(newOffsetSize), false);
@@ -164,7 +168,8 @@ public class CalculatorActivity extends AppCompatActivity {
         try {
             currentTireWidthSize = Integer.parseInt(binding.included.tireWidthView.getText().toString());
             newTireWidthSize = Integer.parseInt(binding.included.tireWidthViewNew.getText().toString());
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
         String currentTireWidth = addUnitOfMeasure(String.valueOf(currentTireWidthSize), false);
         String newTireWidth = addUnitOfMeasure(String.valueOf(newTireWidthSize), false);
@@ -184,10 +189,11 @@ public class CalculatorActivity extends AppCompatActivity {
             newTireWidthSize = Integer.parseInt(binding.included.tireWidthViewNew.getText().toString());
             currentTireHeightSize = Integer.parseInt(binding.included.tireHeightView.getText().toString());
             newTireHeightSize = Integer.parseInt(binding.included.tireHeightViewNew.getText().toString());
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
-        int sidewallCalculationCurrent = Math.round((float)currentTireHeightSize / 100 * currentTireWidthSize);
-        int sidewallCalculationNew = Math.round((float)newTireHeightSize / 100 * newTireWidthSize);
+        int sidewallCalculationCurrent = Math.round((float) currentTireHeightSize / 100 * currentTireWidthSize);
+        int sidewallCalculationNew = Math.round((float) newTireHeightSize / 100 * newTireWidthSize);
         String currentTireHeight = addUnitOfMeasure(String.valueOf(sidewallCalculationCurrent), false);
         String newTireHeight = addUnitOfMeasure(String.valueOf(sidewallCalculationNew), false);
 
@@ -211,10 +217,11 @@ public class CalculatorActivity extends AppCompatActivity {
             newTireHeightSize = Integer.parseInt(binding.included.tireHeightViewNew.getText().toString());
             currentRimDiameterSize = convertInchToMm(binding.included.rimDiameterView);
             newRimDiameterSize = convertInchToMm(binding.included.rimDiameterViewNew);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
-        int sidewallCalculationCurrent = Math.round((float)currentTireHeightSize / 100 * currentTireWidthSize);
-        int sidewallCalculationNew = Math.round((float)newTireHeightSize / 100 * newTireWidthSize);
+        int sidewallCalculationCurrent = Math.round((float) currentTireHeightSize / 100 * currentTireWidthSize);
+        int sidewallCalculationNew = Math.round((float) newTireHeightSize / 100 * newTireWidthSize);
 
         int overallDiameterCurrentSize = sidewallCalculationCurrent * 2 + currentRimDiameterSize;
         int overallDiameterNewSize = sidewallCalculationNew * 2 + newRimDiameterSize;
@@ -235,7 +242,7 @@ public class CalculatorActivity extends AppCompatActivity {
         binding.included.overallDiameterDiffTv.setCompoundDrawablesWithIntrinsicBounds(getArrowDrawable((int) diffPercentage), null, null, null);
         binding.included.overallDiameterDiffTv.setText(diffOverallDiameter);
 
-        String newSpeedometerReading = String.valueOf( Math.round((float)overallDiameterNewSize / overallDiameterCurrentSize * 60));
+        String newSpeedometerReading = String.valueOf(Math.round((float) overallDiameterNewSize / overallDiameterCurrentSize * 60));
         binding.included.speedometerNewTv.setText(getString(R.string.speedo_difference_text, newSpeedometerReading));
     }
 }

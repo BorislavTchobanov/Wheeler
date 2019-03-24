@@ -11,11 +11,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
 import com.wheelandtire.android.wheeler.model.Vehicle;
@@ -24,6 +23,7 @@ import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,23 +51,26 @@ public class FitmentActivity extends AppCompatActivity
         setContentView(R.layout.activity_fitment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Wheel&Tire");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setTitle(R.string.fitment_activity_title);
 
         goButton = findViewById(R.id.goButton);
 
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, calculateNoOfColumns());
         recyclerView.setLayoutManager(gridLayoutManager);
-//        progressDoalog = new ProgressDialog(this);
-//        progressDoalog.setMessage("Loading....");
-//        progressDoalog.show();
 
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
-//        testRetrofit();
         vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
         retrieveVehicleProfile();
+    }
 
+    private int calculateNoOfColumns() {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 200;
+
+        return (int) (dpWidth / scalingFactor);
     }
 
     private void retrieveVehicleProfile() {
@@ -82,21 +85,17 @@ public class FitmentActivity extends AppCompatActivity
             setupRecyclerView(recyclerView);
         }
 
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(checkRequiredFileds()) {
-                    Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
-                            vehicleSearch.getYear(), vehicleSearch.getTrim());
-                    makeFinalServiceCall(call);
-                }
+        goButton.setOnClickListener(v -> {
+            if (checkRequiredFields()) {
+                Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                        vehicleSearch.getYear(), vehicleSearch.getTrim());
+                makeFinalServiceCall(call);
             }
         });
 
     }
 
-    private boolean checkRequiredFileds() {
+    private boolean checkRequiredFields() {
         int pos = vehicleSearch.getCurrentSpinnerPosition();
         if (pos == 0 || vehicleSearch.getMake() == null || vehicleSearch.getModel() == null || vehicleSearch.getYear() == null) {
             vehicleSearch.requiredFiled();
@@ -112,22 +111,15 @@ public class FitmentActivity extends AppCompatActivity
             public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
                 vehicleList = response.body();
                 setupRecyclerView(recyclerView);
-                Log.i("TEST","SUCCESS!!! = " + vehicleList);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
-                Log.i("TEST","Something went wrong...Please try later! = " + t);
+                Toast.makeText(FitmentActivity.this,
+                        "Oops! Something went wrong with the call to the server!",
+                        Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private int calculateNoOfColumns() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        int scalingFactor = 200;
-
-        return (int) (dpWidth / scalingFactor);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -151,6 +143,10 @@ public class FitmentActivity extends AppCompatActivity
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.action_toolbar_button:
+                Intent intent = new Intent(FitmentActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -171,11 +167,11 @@ public class FitmentActivity extends AppCompatActivity
 //                    .replace(R.id.recipe_detail_container, fragment)
 //                    .commit();
 //        } else {
-            Intent intent = new Intent(this, FitmentDetailActivity.class);
-            intent.putExtra(EXTRA_VEHICLE, vehicleList.get(clickedItemIndex));
-            intent.putExtra(EXTRA_CURRENT_TRIM_INDEX, clickedItemIndex);
+        Intent intent = new Intent(this, FitmentDetailActivity.class);
+        intent.putExtra(EXTRA_VEHICLE, vehicleList.get(clickedItemIndex));
+        intent.putExtra(EXTRA_CURRENT_TRIM_INDEX, clickedItemIndex);
 
-            startActivity(intent);
+        startActivity(intent);
 //        }
     }
 }

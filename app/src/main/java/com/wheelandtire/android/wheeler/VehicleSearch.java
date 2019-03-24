@@ -194,24 +194,24 @@ public class VehicleSearch {
 
         switch (currentDropdown) {
             case 1:
-                makeHint.setName("Make");
-                makeHint.setSlug("Make");
+                makeHint.setName("Choose Make");
+//                makeHint.setSlug("Make");
                 break;
             case 2:
-                makeHint.setName("Model");
-                makeHint.setSlug("Model");
+                makeHint.setName("Choose Model");
+//                makeHint.setSlug("Model");
                 break;
             case 3:
-                makeHint.setName("Year");
-                makeHint.setSlug("Year");
+                makeHint.setName("Choose Year");
+//                makeHint.setSlug("Year");
                 break;
             case 4:
-                makeHint.setName("Trim");
-                makeHint.setSlug("Trim");
+                makeHint.setName("Choose Trim");
+//                makeHint.setSlug("Trim");
                 break;
             default:
-                makeHint.setName("Make");
-                makeHint.setSlug("Make");
+                makeHint.setName("Choose Make");
+//                makeHint.setSlug("Make");
         }
         return makeHint;
     }
@@ -231,7 +231,6 @@ public class VehicleSearch {
             public void onItemSelected(AdapterView<?> adapterView, final View view, int i, long l) {
                 if (i > 0) {
                     String item = Objects.requireNonNull(dataAdapter.getItem(i)).getSlug();
-                    Toast.makeText(context, item, Toast.LENGTH_LONG).show();
 
 //                    if (callNumber > numOfDropDowns) {
 //                        trim = item;
@@ -258,6 +257,10 @@ public class VehicleSearch {
                 // DO Nothing here
             }
         });
+    }
+
+    public int getCurrentSpinnerPosition() {
+        return spinner.getSelectedItemPosition();
     }
 
     private Call<List<VehicleMake>> makeCall(int caseIndex, String make, String model, String year) {

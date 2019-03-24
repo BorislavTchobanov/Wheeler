@@ -58,42 +58,36 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/rimDiameterView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number|none"
             android:maxLength="2"
-            android:imeOptions="actionNext"
-            android:digits="0123456789"/>
+            android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="X"/>
 
-        <EditText
+        <TextView
             android:id="@+id/rimWidthView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:maxLength="4"
-            android:imeOptions="actionNext"
-            android:digits="0123456789."/>
+            android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ET"/>
 
-        <EditText
+        <TextView
             android:id="@+id/rimOffsetView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number|none"
             android:maxLength="2"
-            android:imeOptions="actionNext"
-            android:digits="0123456789"/>
+            android:padding="5dp"/>
 
     </LinearLayout>
 
@@ -104,42 +98,36 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/tireWidthView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number|none"
             android:maxLength="3"
-            android:imeOptions="actionNext"
-            android:digits="0123456789"/>
+            android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"/>
 
-        <EditText
+        <TextView
             android:id="@+id/tireHeightView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number|none"
             android:maxLength="2"
-            android:imeOptions="actionNext"
-            android:digits="0123456789"/>
+            android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"/>
 
-        <EditText
+        <TextView
             android:id="@+id/tireDiameterView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number|none"
             android:maxLength="2"
-            android:imeOptions="actionDone"
-            android:digits="0123456789"/>
+            android:padding="5dp"/>
 
     </LinearLayout>
 

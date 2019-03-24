@@ -8,4 +8,5 @@
     <string name="spinner_title">Vehicle Make</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="vehicle_profile_title">Vehicle Profile</string>
+    <string name="write_up_test_text">The offset of a wheel is the distance from the hub mounting surface to the center line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative, or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel. It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset is when the hub mounting surface is toward the back or brake side of the wheels centerline. A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.</string>
 </resources>

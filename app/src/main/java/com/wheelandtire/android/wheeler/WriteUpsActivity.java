@@ -44,30 +44,10 @@ public class WriteUpsActivity extends AppCompatActivity {
         terminologyList.add("test4");
 
         writeUpsContentList = new ArrayList<>();
-        writeUpsContentList.add("The offset of a wheel is the distance from the hub mounting surface to the center" +
-                "line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative," +
-                "or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel." +
-                "It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset" +
-                "is when the hub mounting surface is toward the back or brake side of the wheels centerline." +
-                "A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.");
-        writeUpsContentList.add("The offset of a wheel is the distance from the hub mounting surface to the center" +
-                "line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative," +
-                "or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel." +
-                "It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset" +
-                "is when the hub mounting surface is toward the back or brake side of the wheels centerline." +
-                "A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.");
-        writeUpsContentList.add("The offset of a wheel is the distance from the hub mounting surface to the center" +
-                "line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative," +
-                "or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel." +
-                "It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset" +
-                "is when the hub mounting surface is toward the back or brake side of the wheels centerline." +
-                "A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.");
-        writeUpsContentList.add("The offset of a wheel is the distance from the hub mounting surface to the center" +
-                "line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative," +
-                "or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel." +
-                "It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset" +
-                "is when the hub mounting surface is toward the back or brake side of the wheels centerline." +
-                "A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.");
+        writeUpsContentList.add(getString(R.string.write_up_test_text));
+        writeUpsContentList.add(getString(R.string.write_up_test_text));
+        writeUpsContentList.add(getString(R.string.write_up_test_text));
+        writeUpsContentList.add(getString(R.string.write_up_test_text));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

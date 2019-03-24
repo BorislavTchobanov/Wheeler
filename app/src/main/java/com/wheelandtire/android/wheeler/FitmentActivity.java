@@ -1,7 +1,9 @@
 package com.wheelandtire.android.wheeler;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -80,14 +82,25 @@ public class FitmentActivity extends AppCompatActivity
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                vehicleList = vehicleSearch.getVehicleList();
-                Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
-                        vehicleSearch.getYear(), vehicleSearch.getTrim());
-                makeFinalServiceCall(call);
-//                setupRecyclerView(recyclerView);
+
+                if(checkRequiredFileds()) {
+                    Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                            vehicleSearch.getYear(), vehicleSearch.getTrim());
+                    makeFinalServiceCall(call);
+                }
             }
         });
 
+    }
+
+    private boolean checkRequiredFileds() {
+        int pos = vehicleSearch.getCurrentSpinnerPosition();
+        if (pos == 0 || vehicleSearch.getMake() == null || vehicleSearch.getModel() == null || vehicleSearch.getYear() == null) {
+            vehicleSearch.requiredFiled();
+            return false;
+        }
+
+        return true;
     }
 
     private void makeFinalServiceCall(Call<List<Vehicle>> call) {
@@ -122,6 +135,10 @@ public class FitmentActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
+        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
+        menu.getItem(0).setTitle(profileName);
+
         return true;
     }
 

@@ -63,12 +63,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void populateViews(VehicleProfile vehicleProfile) {
-        EditText rimDiameter = findViewById(R.id.rimDiameterView);
-        EditText rimWidth = findViewById(R.id.rimWidthView);
-        EditText rimOffset = findViewById(R.id.rimOffsetView);
-        EditText tireWidth = findViewById(R.id.tireWidthView);
-        EditText tireHeight = findViewById(R.id.tireHeightView);
-        EditText tireDiameter = findViewById(R.id.tireDiameterView);
+        TextView rimDiameter = findViewById(R.id.rimDiameterView);
+        TextView rimWidth = findViewById(R.id.rimWidthView);
+        TextView rimOffset = findViewById(R.id.rimOffsetView);
+        TextView tireWidth = findViewById(R.id.tireWidthView);
+        TextView tireHeight = findViewById(R.id.tireHeightView);
+        TextView tireDiameter = findViewById(R.id.tireDiameterView);
 
         if (vehicleProfile != null) {
 
@@ -144,7 +144,8 @@ public class ProfileActivity extends AppCompatActivity {
             profileNameTv.setError("Profile Name is required!");
             return false;
         }
-        if (vehicleSearch.getMake() == null || vehicleSearch.getModel() == null || vehicleSearch.getYear() == null) {
+        int pos = vehicleSearch.getCurrentSpinnerPosition();
+        if (pos == 0 || vehicleSearch.getMake() == null || vehicleSearch.getModel() == null || vehicleSearch.getYear() == null) {
             vehicleSearch.requiredFiled();
             return false;
         }

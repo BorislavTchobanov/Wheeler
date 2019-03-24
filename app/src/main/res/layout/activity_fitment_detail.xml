@@ -29,6 +29,10 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="top"
+            app:expandedTitleMarginStart="56dp"
+            app:expandedTitleMarginTop="16dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="Wheel&amp;Tire List">
 

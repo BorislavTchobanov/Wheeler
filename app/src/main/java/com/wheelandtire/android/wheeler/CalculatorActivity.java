@@ -2,6 +2,7 @@ package com.wheelandtire.android.wheeler;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
@@ -9,12 +10,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wheelandtire.android.wheeler.databinding.ActivityCalculatorBinding;
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
+
+import java.util.Objects;
+
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_KEY;
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_PREFS;
 
 
 public class CalculatorActivity extends AppCompatActivity {
@@ -25,18 +30,13 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_calculator);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_calculator);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Calculator");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setTitle(R.string.calculator_activity_title);
 
         viewModel = ViewModelProviders.of(this).get(VehicleViewModel.class);
         retrieveVehicleProfile();
-//        vehicleSearch = new VehicleSearch(this, getWindow().getDecorView().getRootView(), 4);
-//        testRetrofit();
-//        menuItem.setTitle(profileName);
     }
 
     private void retrieveVehicleProfile() {
@@ -47,33 +47,29 @@ public class CalculatorActivity extends AppCompatActivity {
 
         if (vehicleProfile != null) {
             String tireAndRimDiameter = vehicleProfile.getProfileTireAndRimDiameter();
-//            rimDiameter.setText(tireAndRimDiameter);
-            binding.included.rimWidthView.setText(vehicleProfile.getProfileRimWidth());
-            binding.included.rimOffsetView.setText(vehicleProfile.getProfileRimOffset());
             binding.included.tireWidthView.setText(vehicleProfile.getProfileTireWidth());
             binding.included.tireHeightView.setText(vehicleProfile.getProfileTireHeight());
             binding.included.rimDiameterView.setText(tireAndRimDiameter);
+            binding.included.rimWidthView.setText(vehicleProfile.getProfileRimWidth());
+            binding.included.rimOffsetView.setText(vehicleProfile.getProfileRimOffset());
         }
 
-        binding.included.goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculateRimDiameter();
-                calculateRimWidth();
-                calculateOffset();
-                calculateTireWidth();
-                calculateTireSidewall();
-                calculateOverallDiameterAndSpeedo();
-            }
+        binding.included.goButton.setOnClickListener(v -> {
+            calculateRimDiameter();
+            calculateRimWidth();
+            calculateOffset();
+            calculateTireWidth();
+            calculateTireSidewall();
+            calculateOverallDiameterAndSpeedo();
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
-        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
-        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
+        getMenuInflater().inflate(R.menu.toolbar_button, menu);
+        SharedPreferences sharedPreferences = getSharedPreferences(PROFILE_NAME_PREFS, Context.MODE_PRIVATE);
+        String profileName = sharedPreferences.getString(PROFILE_NAME_KEY, getString(R.string.profile_name_default_value));
         menu.getItem(0).setTitle(profileName);
         return true;
     }
@@ -84,13 +80,17 @@ public class CalculatorActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.action_toolbar_button:
+                Intent intent = new Intent(CalculatorActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private String addUnitOfMeasure(String initalText, boolean isPercentage) {
-        return isPercentage ? initalText.concat("%") : initalText.concat("mm");
+    private String addUnitOfMeasure(String initialText, boolean isPercentage) {
+        return isPercentage ? initialText.concat("%") : initialText.concat("mm");
     }
 
     private int convertInchToMm(EditText currentView) {
@@ -236,6 +236,6 @@ public class CalculatorActivity extends AppCompatActivity {
         binding.included.overallDiameterDiffTv.setText(diffOverallDiameter);
 
         String newSpeedometerReading = String.valueOf( Math.round((float)overallDiameterNewSize / overallDiameterCurrentSize * 60));
-        binding.included.speedometerNewTv.setText("When speedometer reads 60km/h actual speed will be " + newSpeedometerReading + "km/h");
+        binding.included.speedometerNewTv.setText(getString(R.string.speedo_difference_text, newSpeedometerReading));
     }
 }

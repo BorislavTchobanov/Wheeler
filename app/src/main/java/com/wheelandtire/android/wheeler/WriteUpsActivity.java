@@ -63,7 +63,7 @@ public class WriteUpsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
+        getMenuInflater().inflate(R.menu.toolbar_button, menu);
         menu.getItem(0).setVisible(false);
 
         return true;

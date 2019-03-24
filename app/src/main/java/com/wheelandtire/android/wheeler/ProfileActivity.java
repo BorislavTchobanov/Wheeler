@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
+        getMenuInflater().inflate(R.menu.toolbar_button, menu);
         return true;
     }
 
@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.action_settings:
+            case R.id.action_toolbar_button:
                 if(!checkRequiredFileds(profileNameTv.getText().toString())) {
                     break;
                 } else {

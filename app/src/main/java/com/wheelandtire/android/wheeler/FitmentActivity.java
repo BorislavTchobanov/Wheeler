@@ -29,6 +29,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_KEY;
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_PREFS;
+
 public class FitmentActivity extends AppCompatActivity
         implements FitmentAdapter.ListItemClickListener {
 
@@ -134,9 +137,9 @@ public class FitmentActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile_toolbar_button, menu);
-        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
-        String profileName = sharedpreferences.getString("profile_name_key", "notfound");
+        getMenuInflater().inflate(R.menu.toolbar_button, menu);
+        SharedPreferences sharedPreferences = getSharedPreferences(PROFILE_NAME_PREFS, Context.MODE_PRIVATE);
+        String profileName = sharedPreferences.getString(PROFILE_NAME_KEY, getString(R.string.profile_name_default_value));
         menu.getItem(0).setTitle(profileName);
 
         return true;

@@ -132,8 +132,11 @@ public class CalculatorActivity extends AppCompatActivity {
         int currentRimWidthSize = 0;
         int newRimWidthSize = 0;
         try {
-            currentRimWidthSize = convertInchToMm(binding.included.rimWidthView);
-            newRimWidthSize = convertInchToMm(binding.included.rimWidthViewNew);
+            double currRimDiamInches = Double.parseDouble(binding.included.rimWidthView.getText().toString());
+            double newRimDiamInches = Double.parseDouble(binding.included.rimWidthViewNew.getText().toString());
+
+            currentRimWidthSize = (int) (Math.round(currRimDiamInches * 25.4 * 10) / 10.0);
+            newRimWidthSize = (int) (Math.round(newRimDiamInches * 25.4 * 10) / 10.0);
         } catch (NumberFormatException e) {
         }
 

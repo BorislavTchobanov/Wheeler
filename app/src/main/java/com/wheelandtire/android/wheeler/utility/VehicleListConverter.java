@@ -12,7 +12,7 @@ import java.util.List;
 
 public class VehicleListConverter {
 
-    static Gson gson = new Gson();
+    private static Gson gson = new Gson();
 
     @TypeConverter
     public static List<Vehicle> stringToSomeObjectList(String data) {

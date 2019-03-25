@@ -10,16 +10,9 @@ import android.arch.persistence.room.Update;
 
 import com.wheelandtire.android.wheeler.model.VehicleProfile;
 
-import java.util.List;
 
 @Dao
 public interface VehicleProfileDao {
-
-//    @Query("SELECT * FROM VehicleProfile ORDER BY id")
-//    LiveData<List<VehicleProfile>> loadAllFavouriteMoves();
-//
-//    @Query("SELECT * FROM VehicleProfile WHERE id=:id")
-//    VehicleProfile loadMovieById(int id);
 
     @Query("SELECT * FROM VehicleProfile")
     LiveData<VehicleProfile> loadAllFavouriteMoves();

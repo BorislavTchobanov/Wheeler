@@ -3,723 +3,725 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data/>
+    <data />
 
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    tools:context=".FitmentActivity">
-
-    <TextView
-        android:id="@+id/current_setup_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:drawableEnd="@drawable/wheel_icon"
-        android:scaleType="fitXY"
-        android:text="Current "
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/tireWidthView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="3"
-        android:imeOptions="actionNext"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_slash"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/current_setup_label" />
-
-    <TextView
-        android:id="@+id/current_setup_slash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="/"
-        app:layout_constraintBottom_toBottomOf="@id/tireWidthView"
-        app:layout_constraintEnd_toStartOf="@id/tireHeightView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireWidthView"
-        app:layout_constraintTop_toTopOf="@id/tireWidthView" />
-
-    <EditText
-        android:id="@+id/tireHeightView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionNext"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_slash"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_r"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_slash"
-        app:layout_constraintTop_toTopOf="@id/current_setup_slash" />
-
-    <TextView
-        android:id="@+id/current_setup_r"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="R"
-        app:layout_constraintBottom_toBottomOf="@id/tireHeightView"
-        app:layout_constraintEnd_toStartOf="@id/rimDiameterView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireHeightView"
-        app:layout_constraintTop_toTopOf="@id/tireHeightView" />
-
-    <EditText
-        android:id="@+id/rimDiameterView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionNext"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_r"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_x"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_r"
-        app:layout_constraintTop_toTopOf="@id/current_setup_r" />
-
-    <TextView
-        android:id="@+id/current_setup_x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="X"
-        app:layout_constraintBottom_toBottomOf="@id/rimDiameterView"
-        app:layout_constraintEnd_toStartOf="@id/rimWidthView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/rimDiameterView"
-        app:layout_constraintTop_toTopOf="@id/rimDiameterView" />
-
-    <EditText
-        android:id="@+id/rimWidthView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789."
-        android:inputType="number"
-        android:maxLength="4"
-        android:imeOptions="actionNext"
-        android:textAlignment="viewEnd"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_x"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_j"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_x"
-        app:layout_constraintTop_toTopOf="@id/current_setup_x" />
-
-    <TextView
-        android:id="@+id/current_setup_j"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="j"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="@id/rimWidthView"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_et"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/rimWidthView"
-        app:layout_constraintTop_toTopOf="@id/rimWidthView" />
-
-    <TextView
-        android:id="@+id/current_setup_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="ET"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_j"
-        app:layout_constraintEnd_toStartOf="@id/rimOffsetView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_j"
-        app:layout_constraintTop_toTopOf="@id/current_setup_j" />
-
-    <EditText
-        android:id="@+id/rimOffsetView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionNext"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_et"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_et"
-        app:layout_constraintTop_toTopOf="@id/current_setup_et" />
-
-    <TextView
-        android:id="@+id/current_setup_label_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:drawableEnd="@drawable/wheel_icon"
-        android:scaleType="fitXY"
-        android:text="New "
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tireWidthView" />
-
-    <EditText
-        android:id="@+id/tireWidthViewNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="3"
-        android:imeOptions="actionNext"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_slash_new"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_label_new"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/current_setup_label_new" />
-
-    <TextView
-        android:id="@+id/current_setup_slash_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="/"
-        app:layout_constraintBottom_toBottomOf="@id/tireWidthViewNew"
-        app:layout_constraintEnd_toStartOf="@id/tireHeightViewNew"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireWidthViewNew"
-        app:layout_constraintTop_toTopOf="@id/tireWidthViewNew" />
-
-    <EditText
-        android:id="@+id/tireHeightViewNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionNext"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_slash_new"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_r_new"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_slash_new"
-        app:layout_constraintTop_toTopOf="@id/current_setup_slash_new" />
-
-    <TextView
-        android:id="@+id/current_setup_r_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="R"
-        app:layout_constraintBottom_toBottomOf="@id/tireHeightViewNew"
-        app:layout_constraintEnd_toStartOf="@id/rimDiameterViewNew"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tireHeightViewNew"
-        app:layout_constraintTop_toTopOf="@id/tireHeightViewNew" />
-
-    <EditText
-        android:id="@+id/rimDiameterViewNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionNext"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_r_new"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_x_new"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_r_new"
-        app:layout_constraintTop_toTopOf="@id/current_setup_r_new" />
-
-    <TextView
-        android:id="@+id/current_setup_x_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="X"
-        app:layout_constraintBottom_toBottomOf="@id/rimDiameterViewNew"
-        app:layout_constraintEnd_toStartOf="@id/rimWidthViewNew"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/rimDiameterViewNew"
-        app:layout_constraintTop_toTopOf="@id/rimDiameterViewNew" />
-
-    <EditText
-        android:id="@+id/rimWidthViewNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789."
-        android:inputType="number"
-        android:maxLength="4"
-        android:imeOptions="actionNext"
-        android:textAlignment="viewEnd"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_x_new"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_j_new"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_x_new"
-        app:layout_constraintTop_toTopOf="@id/current_setup_x_new" />
-
-    <TextView
-        android:id="@+id/current_setup_j_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="j"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="@id/rimWidthViewNew"
-        app:layout_constraintEnd_toStartOf="@id/current_setup_et_new"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/rimWidthViewNew"
-        app:layout_constraintTop_toTopOf="@id/rimWidthViewNew" />
-
-    <TextView
-        android:id="@+id/current_setup_et_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="ET"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_j_new"
-        app:layout_constraintEnd_toStartOf="@id/rimOffsetViewNew"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_j_new"
-        app:layout_constraintTop_toTopOf="@id/current_setup_j_new" />
-
-    <EditText
-        android:id="@+id/rimOffsetViewNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:inputType="number|none"
-        android:maxLength="2"
-        android:imeOptions="actionDone"
-        app:layout_constraintBottom_toBottomOf="@id/current_setup_et_new"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/current_setup_et_new"
-        app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
-
-    <Button
-        android:id="@+id/goButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GO"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TableLayout
-        android:id="@+id/calculator_table"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="50dp"
-        android:measureWithLargestChild="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goButton">
-        <!--Rims-->
-        <TableRow
-            android:id="@+id/table_row1"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        tools:context=".CalculatorActivity">
+
+        <TextView
+            android:id="@+id/current_setup_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_margin_side"
+            android:drawableEnd="@drawable/wheel_icon"
+            android:drawablePadding="@dimen/horizontal_margin_small"
+            android:scaleType="fitXY"
+            android:text="@string/current_setup_label"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/tireWidthView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/current_tire_width_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="3"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_slash"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_setup_label" />
+
+        <TextView
+            android:id="@+id/current_setup_slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="/"
+            app:layout_constraintBottom_toBottomOf="@id/tireWidthView"
+            app:layout_constraintEnd_toStartOf="@id/tireHeightView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tireWidthView"
+            app:layout_constraintTop_toTopOf="@id/tireWidthView" />
+
+        <EditText
+            android:id="@+id/tireHeightView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/current_tire_height_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_slash"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_r"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_slash"
+            app:layout_constraintTop_toTopOf="@id/current_setup_slash" />
+
+        <TextView
+            android:id="@+id/current_setup_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="R"
+            app:layout_constraintBottom_toBottomOf="@id/tireHeightView"
+            app:layout_constraintEnd_toStartOf="@id/rimDiameterView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tireHeightView"
+            app:layout_constraintTop_toTopOf="@id/tireHeightView" />
+
+        <EditText
+            android:id="@+id/rimDiameterView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/current_wheel_diameter_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_r"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_x"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_r"
+            app:layout_constraintTop_toTopOf="@id/current_setup_r" />
+
+        <TextView
+            android:id="@+id/current_setup_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="X"
+            app:layout_constraintBottom_toBottomOf="@id/rimDiameterView"
+            app:layout_constraintEnd_toStartOf="@id/rimWidthView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/rimDiameterView"
+            app:layout_constraintTop_toTopOf="@id/rimDiameterView" />
+
+        <EditText
+            android:id="@+id/rimWidthView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/current_wheel_width_description"
+            android:digits="0123456789."
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_x"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_j"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_x"
+            app:layout_constraintTop_toTopOf="@id/current_setup_x" />
+
+        <TextView
+            android:id="@+id/current_setup_j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="j"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="@id/rimWidthView"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_et"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/rimWidthView"
+            app:layout_constraintTop_toTopOf="@id/rimWidthView" />
+
+        <TextView
+            android:id="@+id/current_setup_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="ET"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_j"
+            app:layout_constraintEnd_toStartOf="@id/rimOffsetView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_j"
+            app:layout_constraintTop_toTopOf="@id/current_setup_j" />
+
+        <EditText
+            android:id="@+id/rimOffsetView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/current_wheel_offset_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_et"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_et"
+            app:layout_constraintTop_toTopOf="@id/current_setup_et" />
+
+        <TextView
+            android:id="@+id/current_setup_label_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableEnd="@drawable/wheel_icon"
+            android:drawablePadding="@dimen/horizontal_margin_small"
+            android:scaleType="fitXY"
+            android:text="@string/new_setup_label"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tireWidthView" />
+
+        <EditText
+            android:id="@+id/tireWidthViewNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/new_tire_width_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="3"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_slash_new"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_label_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_setup_label_new" />
+
+        <TextView
+            android:id="@+id/current_setup_slash_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="/"
+            app:layout_constraintBottom_toBottomOf="@id/tireWidthViewNew"
+            app:layout_constraintEnd_toStartOf="@id/tireHeightViewNew"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tireWidthViewNew"
+            app:layout_constraintTop_toTopOf="@id/tireWidthViewNew" />
+
+        <EditText
+            android:id="@+id/tireHeightViewNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/new_tire_height_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_slash_new"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_r_new"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_slash_new"
+            app:layout_constraintTop_toTopOf="@id/current_setup_slash_new" />
+
+        <TextView
+            android:id="@+id/current_setup_r_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="R"
+            app:layout_constraintBottom_toBottomOf="@id/tireHeightViewNew"
+            app:layout_constraintEnd_toStartOf="@id/rimDiameterViewNew"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tireHeightViewNew"
+            app:layout_constraintTop_toTopOf="@id/tireHeightViewNew" />
+
+        <EditText
+            android:id="@+id/rimDiameterViewNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/new_wheel_diameter_description"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_r_new"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_x_new"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_r_new"
+            app:layout_constraintTop_toTopOf="@id/current_setup_r_new" />
+
+        <TextView
+            android:id="@+id/current_setup_x_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="X"
+            app:layout_constraintBottom_toBottomOf="@id/rimDiameterViewNew"
+            app:layout_constraintEnd_toStartOf="@id/rimWidthViewNew"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/rimDiameterViewNew"
+            app:layout_constraintTop_toTopOf="@id/rimDiameterViewNew" />
+
+        <EditText
+            android:id="@+id/rimWidthViewNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/new_wheel_width_description"
+            android:digits="0123456789."
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_x_new"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_j_new"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_x_new"
+            app:layout_constraintTop_toTopOf="@id/current_setup_x_new" />
+
+        <TextView
+            android:id="@+id/current_setup_j_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="j"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="@id/rimWidthViewNew"
+            app:layout_constraintEnd_toStartOf="@id/current_setup_et_new"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/rimWidthViewNew"
+            app:layout_constraintTop_toTopOf="@id/rimWidthViewNew" />
+
+        <TextView
+            android:id="@+id/current_setup_et_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_margin_side"
+            android:text="ET"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_j_new"
+            app:layout_constraintEnd_toStartOf="@id/rimOffsetViewNew"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_j_new"
+            app:layout_constraintTop_toTopOf="@id/current_setup_j_new" />
+
+        <EditText
+            android:id="@+id/rimOffsetViewNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/new_wheel_offset_description"
+            android:digits="0123456789"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="number|none"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@id/current_setup_et_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/current_setup_et_new"
+            app:layout_constraintTop_toTopOf="@id/current_setup_et_new" />
+
+        <Button
+            android:id="@+id/goButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/go_button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tireWidthViewNew" />
+
+        <TableLayout
+            android:id="@+id/calculator_table"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_margin_small"
+            android:layout_marginTop="@dimen/calculator_table_margin_top"
+            android:measureWithLargestChild="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/goButton">
+            <!--Rims-->
+            <TableRow
+                android:id="@+id/table_row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/row1_col1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Rims"
-                android:textColor="#000"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/row1_col1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_rims"
+                    android:textColor="@color/black_text"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/row1_col2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Current"
-                android:textColor="#000"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/row1_col2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_current"
+                    android:textColor="@color/black_text"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/row1_col3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="New"
-                android:textColor="#000"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/row1_col3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_new"
+                    android:textColor="@color/black_text"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/row1_col4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Diff"
-                android:textColor="#000"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/row1_col4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_diff"
+                    android:textColor="@color/black_text"
+                    android:textStyle="bold" />
+            </TableRow>
 
-        <TableRow
-            android:id="@+id/table_rim_diameter_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TableRow
+                android:id="@+id/table_rim_diameter_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/rim_diameter_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Rim Diameter"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/rim_diameter_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_rim_diameter"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/rim_diameter_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="666"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/rim_diameter_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
 
-            <TextView
-                android:id="@+id/rim_diameter_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/rim_diameter_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_increase"
-                android:text="6%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/rim_diameter_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
 
-        <TableRow
-            android:id="@+id/table_rim_width_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/rim_width_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Rim Width"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/rim_diameter_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
 
-            <TextView
-                android:id="@+id/rim_width_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                    android:textColor="@color/black_text" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/rim_width_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+            <TableRow
+                android:id="@+id/table_rim_width_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/rim_width_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_decrease"
-                android:text="16%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/rim_width_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_rim_width"
+                    android:textColor="@color/black_text" />
 
-        <TableRow
-            android:id="@+id/table_offset_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/rim_width_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
 
-            <TextView
-                android:id="@+id/offset_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Offset"
-                android:textColor="#000" />
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/offset_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="666"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/rim_width_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
 
-            <TextView
-                android:id="@+id/offset_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/offset_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_increase"
-                android:text="6%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/rim_width_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
 
-        <!--Tires-->
-        <TableRow
-            android:id="@+id/table_tire_width_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TableRow
+                android:id="@+id/table_offset_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tire_width_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Tire Width"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/offset_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_offset"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/tire_width_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="666"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/offset_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/tire_width_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/offset_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/tire_width_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_increase"
-                android:text="6%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/offset_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
 
-        <TableRow
-            android:id="@+id/table_sidewall_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <!--Tires-->
+            <TableRow
+                android:id="@+id/table_tire_width_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/sidewall_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Sidewall"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/tire_width_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_tire_width"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/sidewall_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="666"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/tire_width_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/sidewall_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/tire_width_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/sidewall_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_increase"
-                android:text="6%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/tire_width_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
 
-        <TableRow
-            android:id="@+id/table_overall_diameter_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TableRow
+                android:id="@+id/table_sidewall_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/overall_diameter_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Overall Diameter"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/sidewall_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_sidewall"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/overall_diameter_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="666"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/sidewall_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/overall_diameter_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/sidewall_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/overall_diameter_diff_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:drawableStart="@drawable/ic_increase"
-                android:text="6%"
-                android:textColor="#000" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/sidewall_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
 
-        <TableRow
-            android:id="@+id/table_speedometer_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TableRow
+                android:id="@+id/table_overall_diameter_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/speedometer_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Speedometer"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/overall_diameter_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_overall_diameter"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/speedometer_current_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Assuming OEM"
-                android:textColor="#000" />
+                <TextView
+                    android:id="@+id/overall_diameter_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-            <TextView
-                android:id="@+id/speedometer_new_tv"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:background="@drawable/cell_shape"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="When speedometer reads 60 km/h actual speed will be 57.3 km/h "
-                android:textColor="#000" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:id="@+id/overall_diameter_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
 
-</android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/overall_diameter_diff_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/table_speedometer_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/speedometer_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_speedometer"
+                    android:textColor="@color/black_text" />
+
+                <TextView
+                    android:id="@+id/speedometer_current_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:text="@string/calc_label_speedo_current"
+                    android:textColor="@color/black_text" />
+
+                <TextView
+                    android:id="@+id/speedometer_new_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/calc_cell_padding"
+                    android:textColor="@color/black_text" />
+            </TableRow>
+        </TableLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

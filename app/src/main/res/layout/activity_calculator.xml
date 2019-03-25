@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
+    <data />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -42,23 +40,23 @@
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="top"
-                app:expandedTitleMarginStart="56dp"
-                app:expandedTitleMarginTop="16dp"
+                app:expandedTitleMarginStart="@dimen/expanded_title_margin_start"
+                app:expandedTitleMarginTop="@dimen/expanded_title_margin_top"
                 app:expandedTitleTextAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="?attr/actionBarSize"
                     android:orientation="vertical"
-                    app:layout_collapseMode="parallax"
-                    android:layout_marginTop="?attr/actionBarSize">
+                    app:layout_collapseMode="parallax">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
-                        android:text="Does your tire width fit your rim width?"
+                        android:text="@string/wheel_tire_size_table_title"
                         android:textAlignment="center" />
 
                     <ImageView
@@ -73,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
-                        android:text="Slide up to close"
+                        android:text="@string/wheel_tire_size_hint_text"
                         android:textAlignment="center" />
 
                 </LinearLayout>

@@ -12,19 +12,19 @@
         android:id="@+id/current_setup_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
-        android:text="Wheel&amp;Tire Terminology: "
-        android:textStyle="bold"
+        android:layout_marginStart="@dimen/write_ups_margin_start"
+        android:layout_marginTop="@dimen/write_ups_margin_top"
+        android:layout_marginBottom="@dimen/write_ups_margin_bottom"
+        android:text="@string/write_ups_title"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="@dimen/item_margin" />
 
 </LinearLayout>

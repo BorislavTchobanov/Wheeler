@@ -36,16 +36,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/vehicleImage"
-            android:layout_toEndOf="@id/generationTv"
             android:layout_marginStart="@dimen/item_margin_bottom"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+            android:layout_toEndOf="@id/generationTv"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/boltPatternTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@id/generationTv"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/item_margin_bottom" />
 
     </RelativeLayout>

@@ -27,7 +27,6 @@ public interface WheelSizeService {
                                                   @Query("model") String model,
                                                   @Query("year") String year);
 
-//    @GET("search/by_model/?make=bmw&model=3-series&trim=328i-iv-e46&year=1998&user_key=ba910526cedac48d05b34c37bbeeb90f")
     @GET("vehicles/?user_key=ba910526cedac48d05b34c37bbeeb90f")
     public Call<List<Vehicle>> getVehicle(@Query("make") String make,
                                           @Query("model") String model,

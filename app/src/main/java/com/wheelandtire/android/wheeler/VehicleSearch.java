@@ -200,6 +200,9 @@ class VehicleSearch {
 
     void requiredFiled() {
         TextView errorText = (TextView) spinner.getSelectedView();
+        if (errorText == null) {
+            return;
+        }
         errorText.setError(context.getString(R.string.field_required_error_text));
         errorText.setTextColor(Color.RED);//just to highlight that this is an error
         errorText.setText(context.getString(R.string.field_required_error_text));

@@ -116,7 +116,7 @@ public class VehicleSearch {
             @Override
             public void onFailure(@NonNull Call<List<VehicleMake>> call, @NonNull Throwable t) {
                 Toast.makeText(context,
-                        "Oops! Something went wrong with the call to the server!",
+                        R.string.service_call_failure_message,
                         Toast.LENGTH_SHORT).show();
                 dismissProgressDialog();
             }

@@ -1,31 +1,24 @@
 package com.wheelandtire.android.wheeler;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 
-import com.wheelandtire.android.wheeler.adapter.FitmentAdapter;
 import com.wheelandtire.android.wheeler.adapter.WriteUpsAdapter;
-import com.wheelandtire.android.wheeler.model.VehicleProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class WriteUpsActivity extends AppCompatActivity {
 
-    private VehicleViewModel viewModel;
-    private List<String> terminologyList;
+    private List<String> writeUpsTitleList;
     private List<String> writeUpsContentList;
 
     @Override
@@ -34,20 +27,18 @@ public class WriteUpsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write_ups);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Write-ups");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setTitle(getString(R.string.main_menu_writeups_button_text));
 
-        terminologyList = new ArrayList<>();
-        terminologyList.add("test1");
-        terminologyList.add("test2");
-        terminologyList.add("test3");
-        terminologyList.add("test4");
+        writeUpsTitleList = new ArrayList<>();
+        writeUpsTitleList.add(getString(R.string.write_up_offset_title));
+        writeUpsTitleList.add(getString(R.string.write_up_center_bore_title));
+        writeUpsTitleList.add(getString(R.string.write_up_pcd_title));
 
         writeUpsContentList = new ArrayList<>();
-        writeUpsContentList.add(getString(R.string.write_up_test_text));
-        writeUpsContentList.add(getString(R.string.write_up_test_text));
-        writeUpsContentList.add(getString(R.string.write_up_test_text));
-        writeUpsContentList.add(getString(R.string.write_up_test_text));
+        writeUpsContentList.add(getString(R.string.write_up_offset_text));
+        writeUpsContentList.add(getString(R.string.write_up_center_bore_text));
+        writeUpsContentList.add(getString(R.string.write_up_pcd_text));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -56,9 +47,8 @@ public class WriteUpsActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new WriteUpsAdapter(terminologyList, writeUpsContentList));
+        recyclerView.setAdapter(new WriteUpsAdapter(writeUpsTitleList, writeUpsContentList));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

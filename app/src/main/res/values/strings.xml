@@ -8,7 +8,6 @@
     <string name="spinner_title">Vehicle Make</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="vehicle_profile_title">Vehicle Profile</string>
-    <string name="write_up_test_text">The offset of a wheel is the distance from the hub mounting surface to the center line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative, or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel. It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset is when the hub mounting surface is toward the back or brake side of the wheels centerline. A negative offset wheel usually has a deep lip Zero offset The hub mounting surface is even with the centerline of the wheel.</string>
     <string name="calculator_activity_title">Calculator</string>
     <string name="profile_name_default_value">Vehicle Profile</string>
     <string name="speedo_difference_text">When speedometer reads 60km/h actual speed will be %1$s km/h</string>
@@ -26,4 +25,10 @@
     <string name="hint_text_model">Choose Model</string>
     <string name="hint_text_year">Choose Year</string>
     <string name="hint_text_trim">Choose Trim</string>
+    <string name="write_up_offset_title">Offset (ET)</string>
+    <string name="write_up_offset_text">The offset of a wheel is the distance from the hub mounting surface to the center line of the wheel. The wheel offset is measured in millimeters and results in a positive, negative, or zero offset. Positive offset is when the hub mounting surface is toward the front or wheel side of the wheel. It is common to find a positive offset in newer and front wheel drive vehicles. Negative offset is when the hub mounting surface is toward the back or brake side of the wheels centerline. A negative offset wheel usually has a "deep lip" Zero offset The hub mounting surface is even with the centerline of the wheel.</string>
+    <string name="write_up_center_bore_title">Center Bore</string>
+    <string name="write_up_center_bore_text">The hole in the center of the wheel machined to match the hub of specified vehicles with hub-centric wheels and machined to a generic size with lug centric wheels.</string>
+    <string name="write_up_pcd_title">P.C.D</string>
+    <string name="write_up_pcd_text">(Pitch Circle Diameter) This is also referred to as "Bolt Pattern" - Cars will have a designated number of mounting bolts which car vary from 3 to 8 bolts to mount the wheel to the car. Each bolt will be spaced in a circle diameter accordingly to car manufacturer\'s specification. This is usually measured in millimeters or sometimes in inches.</string>
 </resources>

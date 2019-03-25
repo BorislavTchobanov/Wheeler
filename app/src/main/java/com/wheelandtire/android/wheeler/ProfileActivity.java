@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +25,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_KEY;
+import static com.wheelandtire.android.wheeler.MainActivity.PROFILE_NAME_PREFS;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -172,9 +174,9 @@ public class ProfileActivity extends AppCompatActivity {
         AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
                 .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
 
-        SharedPreferences sharedpreferences = getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = getSharedPreferences(PROFILE_NAME_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("profile_name_key", profileName);
+        editor.putString(PROFILE_NAME_KEY, profileName);
         editor.apply();
     }
 

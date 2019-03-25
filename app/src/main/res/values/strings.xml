@@ -14,4 +14,9 @@
     <string name="speedo_difference_text">When speedometer reads 60km/h actual speed will be %1$s km/h</string>
     <string name="fitment_activity_title"><![CDATA[Wheel&Tire]]></string>
     <string name="fitment_detail_activity_title">Fitment List</string>
+    <string name="admob_application_code">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="main_menu_profile_button_text">Profile</string>
+    <string name="main_menu_fitment_button_text"><![CDATA[Wheel&Tire]]></string>
+    <string name="main_menu_calculator_button_text">Fitment \nCalculator</string>
+    <string name="main_menu_writeups_button_text">Write-ups</string>
 </resources>

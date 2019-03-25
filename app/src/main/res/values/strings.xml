@@ -13,4 +13,5 @@
     <string name="profile_name_default_value">Vehicle Profile</string>
     <string name="speedo_difference_text">When speedometer reads 60km/h actual speed will be %1$s km/h</string>
     <string name="fitment_activity_title"><![CDATA[Wheel&Tire]]></string>
+    <string name="fitment_detail_activity_title">Fitment List</string>
 </resources>

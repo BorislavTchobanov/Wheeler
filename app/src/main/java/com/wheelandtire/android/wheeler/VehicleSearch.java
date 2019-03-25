@@ -168,6 +168,9 @@ class VehicleSearch {
     }
 
     int getCurrentSpinnerPosition() {
+        if (spinner.getId() == R.id.spinnerTrim) {
+            return 1;
+        }
         return spinner.getSelectedItemPosition();
     }
 

@@ -1,6 +1,7 @@
 package com.wheelandtire.android.wheeler;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         MobileAds.initialize(this, getString(R.string.admob_application_code));
+
+        if (!getResources().getBoolean(R.bool.isTablet)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        }
 
         TextView textView = findViewById(R.id.title_tv);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Spantaran.otf");

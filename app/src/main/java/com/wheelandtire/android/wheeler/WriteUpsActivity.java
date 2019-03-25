@@ -1,5 +1,6 @@
 package com.wheelandtire.android.wheeler;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,10 @@ public class WriteUpsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.main_menu_writeups_button_text));
+
+        if (!getResources().getBoolean(R.bool.isTablet)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        }
 
         writeUpsTitleList = new ArrayList<>();
         writeUpsTitleList.add(getString(R.string.write_up_offset_title));

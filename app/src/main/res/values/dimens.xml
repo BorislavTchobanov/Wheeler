@@ -24,4 +24,5 @@
     <dimen name="write_ups_margin_top">35dp</dimen>
     <dimen name="write_ups_margin_bottom">20dp</dimen>
     <dimen name="item_margin">8dp</dimen>
+    <dimen name="image_max_height">250dp</dimen>
 </resources>

@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="expanded_title_margin_start">72dp</dimen>
+    <dimen name="expanded_title_margin_top">20dp</dimen>
+
+</resources>

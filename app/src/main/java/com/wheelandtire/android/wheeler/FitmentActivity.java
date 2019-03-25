@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class FitmentActivity extends AppCompatActivity
     private WheelSizeService service;
     private Button goButton;
     private VehicleSearch vehicleSearch;
+    private boolean mTwoPane;
 
 
     @Override
@@ -53,6 +55,12 @@ public class FitmentActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.fitment_activity_title);
+
+        if (!getResources().getBoolean(R.bool.isTablet)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        }
+
+        mTwoPane = findViewById(R.id.fitment_detail_container) != null;
 
         goButton = findViewById(R.id.goButton);
 
@@ -68,7 +76,7 @@ public class FitmentActivity extends AppCompatActivity
     private int calculateNoOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        int scalingFactor = 200;
+        int scalingFactor = 350;
 
         return (int) (dpWidth / scalingFactor);
     }
@@ -154,24 +162,21 @@ public class FitmentActivity extends AppCompatActivity
 
     @Override
     public void onListItemClick(int clickedItemIndex) {
-//        if (mTwoPane) {
-//            Bundle arguments = new Bundle();
-//            arguments.putSerializable(EXTRA_RECIPE, recipe);
-//            arguments.putSerializable(EXTRA_STEP, step);
-//            arguments.putInt(EXTRA_CURRENT_STEP_INDEX, clickedItemIndex);
-//            arguments.putBoolean(EXTRA_TWO_PANE, mTwoPane);
-//
-//            StepDetailFragment fragment = new StepDetailFragment();
-//            fragment.setArguments(arguments);
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.recipe_detail_container, fragment)
-//                    .commit();
-//        } else {
-        Intent intent = new Intent(this, FitmentDetailActivity.class);
-        intent.putExtra(EXTRA_VEHICLE, vehicleList.get(clickedItemIndex));
-        intent.putExtra(EXTRA_CURRENT_TRIM_INDEX, clickedItemIndex);
+        if (mTwoPane) {
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(EXTRA_VEHICLE, vehicleList.get(clickedItemIndex));
 
-        startActivity(intent);
-//        }
+            FitmentDetailFragment fragment = new FitmentDetailFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fitment_detail_container, fragment)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, FitmentDetailActivity.class);
+            intent.putExtra(EXTRA_VEHICLE, vehicleList.get(clickedItemIndex));
+            intent.putExtra(EXTRA_CURRENT_TRIM_INDEX, clickedItemIndex);
+
+            startActivity(intent);
+        }
     }
 }

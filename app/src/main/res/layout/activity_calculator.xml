@@ -63,6 +63,7 @@
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxHeight="@dimen/image_max_height"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/nav_header_desc"
                         android:src="@drawable/wheel_tire_size" />

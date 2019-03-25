@@ -64,13 +64,17 @@ public class FitmentAdapter extends RecyclerView.Adapter<FitmentAdapter.VehicleG
             return 0;
         }
 
-        for (int j = 0; j < vehicleList.size(); j++) {
-            Vehicle vehicle = vehicleList.get(j);
-            if (vehicle.getTrim() == null) {
-                vehicleList.remove(j);
+        List<Vehicle> vehicleListTrimmed = vehicleList;
+        if (vehicleList != null) {
+            for (int j = vehicleList.size() - 1; j >= 0; j--) {
+                Vehicle vehicle = vehicleList.get(j);
+                if (vehicle.getTrim() == null) {
+                    vehicleListTrimmed.remove(j);
+                }
             }
         }
-        return vehicleList.size();
+
+        return vehicleListTrimmed.size();
     }
 
     class VehicleGenerationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

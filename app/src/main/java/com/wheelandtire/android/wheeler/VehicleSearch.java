@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -16,14 +15,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
-import com.wheelandtire.android.wheeler.database.VehicleProfileDatabase;
-import com.wheelandtire.android.wheeler.model.Vehicle;
 import com.wheelandtire.android.wheeler.model.VehicleMake;
-import com.wheelandtire.android.wheeler.model.VehicleProfile;
 import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
 
-public class VehicleSearch {
+class VehicleSearch {
 
-
-    private static final String SHARED_PREFS_FILE = "wheelerPrefs";
     private static final String PREF_VEHICLE_MAKES_LIST = "pref_vehicle_makes_list";
+
     private Context context;
-    ProgressDialog progressDoalog;
+    private ProgressDialog progressDialog;
     private WheelSizeService service;
     private String make;
     private String model;
@@ -49,25 +42,22 @@ public class VehicleSearch {
     private String trim;
     private List<VehicleMake> vehicleList;
     private Spinner spinner;
-    private VehicleProfileDatabase vehicleProfileDatabase;
     private View rootView;
     private int numOfDropDowns;
-    List<VehicleMake> vehicleMakeList;
-//    private VehicleProfile vehicleProfile;
 
-    public VehicleSearch(final Context context, View rootView, int numOfDropDowns){
+    VehicleSearch(final Context context, View rootView, int numOfDropDowns) {
 
         this.context = context;
         this.rootView = rootView;
         this.numOfDropDowns = numOfDropDowns;
-        progressDoalog = new ProgressDialog(context);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
 
         service = RetrofitClientInstance.getRetrofitInstance().create(WheelSizeService.class);
 
         Call<List<VehicleMake>> call = makeCall(1, null, null, null);
-        vehicleMakeList = getVehicleMakeList(PREF_VEHICLE_MAKES_LIST);
+        List<VehicleMake> vehicleMakeList = getVehicleMakeList();
         if (vehicleMakeList == null) {
             makeInitialServiceCall(call, 2);
         } else {
@@ -77,29 +67,14 @@ public class VehicleSearch {
 
     }
 
-    public void dismissProgressDialog() {
-        if (progressDoalog != null) {
-            progressDoalog.dismiss();
+    private void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
         }
     }
 
-//    public void populateVehicleSpinners(VehicleProfile vehicleProfile) {
-//        if (vehicleProfile == null) {
-//            return;
-//        }
-//        Spinner spinnerMake = rootView.findViewById(R.id.spinnerMake);
-//        Spinner spinnerModel = rootView.findViewById(R.id.spinnerModel);
-//        Spinner spinnerYear = rootView.findViewById(R.id.spinnerYear);
-//        Spinner spinnerTrim = rootView.findViewById(R.id.spinnerTrim);
-//
-////        spinnerMake.setSelection(vehicleMakeList.indexOf());
-//        spinnerModel.setSelection(vehicleList.indexOf(vehicleProfile.getProfileModel()));
-//        spinnerYear.setSelection(vehicleList.indexOf(vehicleProfile.getProfileYear()));
-//        spinnerTrim.setSelection(vehicleList.indexOf(vehicleProfile.getProfileTrim()));
-//    }
-
     private void makeInitialServiceCall(Call<List<VehicleMake>> call, int nextCallNumber) {
-        progressDoalog.show();
+        progressDialog.show();
         call.enqueue(new Callback<List<VehicleMake>>() {
             @Override
             public void onResponse(@NonNull Call<List<VehicleMake>> call, @NonNull Response<List<VehicleMake>> response) {
@@ -123,72 +98,19 @@ public class VehicleSearch {
         });
     }
 
-//    public void makeFinalServiceCall(Call<List<Vehicle>> call, String profileName) {
-//        call.enqueue(new Callback<List<Vehicle>>() {
-//            @Override
-//            public void onResponse(@NonNull Call<List<Vehicle>> call, @NonNull Response<List<Vehicle>> response) {
-//                if (progressDoalog != null) {
-//                    progressDoalog.dismiss();
-//                }
-//                vehicleList = response.body();
-////                setupRecyclerView(recyclerView);
-//                saveToProfile(profileName);
-//                Log.i("TEST","SUCCESS!!! = " + vehicleList);
-//
-//                //TODO Maybe make observer for vehicleList, to notify when changed (will be used both in profile and fitment)
-//
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<List<Vehicle>> call, @NonNull Throwable t) {
-//                progressDoalog.dismiss();
-//                Log.i("TEST","Something went wrong...Please try later! = " + t);
-//            }
-//        });
-//    }
-//
-//    private void checkRequiredFileds(String profileName) {
-//        if (profileName.isEmpty()) {
-//
-//        }
-//    }
-//
-//    public void saveToProfile(String profileName) {
-//        String tireWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireWidth());
-//        String tireHeight = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getTireAspectRatio());
-//        String rimAndTireDiameter = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimDiameter());
-//        String rimWidth = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimWidth());
-//        String rimOffset = String.valueOf(vehicleList.get(0).getWheels().get(0).getFront().getRimOffset());
-//
-//        vehicleProfile = new VehicleProfile(0, profileName, make, model, year,
-//                trim, tireWidth, tireHeight, rimAndTireDiameter, rimWidth, rimOffset, vehicleList);
-//        vehicleProfileDatabase = VehicleProfileDatabase.getInstance(context.getApplicationContext());
-//        AppExecutor.getInstance().discIO().execute(() -> vehicleProfileDatabase
-//                .vehicleProfileDao().saveVehicleProfile(vehicleProfile));
-//
-//        SharedPreferences sharedpreferences = context.getSharedPreferences("myWheelerPrefs", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedpreferences.edit();
-//        editor.putString("profile_name_key", profileName);
-//        editor.apply();
-//    }
-
-//    public List<Vehicle> getVehicleList() {
-//        return vehicleList;
-//    }
-
-    public String getMake() {
+    String getMake() {
         return make;
     }
 
-    public String getModel() {
+    String getModel() {
         return model;
     }
 
-    public String getYear() {
+    String getYear() {
         return year;
     }
 
-    public String getTrim() {
+    String getTrim() {
         return trim;
     }
 
@@ -197,31 +119,25 @@ public class VehicleSearch {
 
         switch (currentDropdown) {
             case 1:
-                makeHint.setName("Choose Make");
-//                makeHint.setSlug("Make");
+                makeHint.setName(context.getString(R.string.hint_text_make));
                 break;
             case 2:
-                makeHint.setName("Choose Model");
-//                makeHint.setSlug("Model");
+                makeHint.setName(context.getString(R.string.hint_text_model));
                 break;
             case 3:
-                makeHint.setName("Choose Year");
-//                makeHint.setSlug("Year");
+                makeHint.setName(context.getString(R.string.hint_text_year));
                 break;
             case 4:
-                makeHint.setName("Choose Trim");
-//                makeHint.setSlug("Trim");
+                makeHint.setName(context.getString(R.string.hint_text_trim));
                 break;
             default:
-                makeHint.setName("Choose Make");
-//                makeHint.setSlug("Make");
+                makeHint.setName(context.getString(R.string.hint_text_make));
         }
         return makeHint;
     }
 
     private void generateDropDownList(List<VehicleMake> vehicleMakeList,
                                       int nextCallNumber) {
-
 
         vehicleMakeList.add(0, makeHint(nextCallNumber - 1));
 
@@ -235,23 +151,12 @@ public class VehicleSearch {
                 if (i > 0) {
                     String item = Objects.requireNonNull(dataAdapter.getItem(i)).getSlug();
 
-//                    if (callNumber > numOfDropDowns) {
-//                        trim = item;
-//                        Call<List<Vehicle>> call;
-//                        if (numOfDropDowns == 3) {
-//                            call = service.getVehicle(make, model, year);
-//                        } else {
-//                            call = service.getVehicle(make, model, year, item);
-//                        }
-//                        makeFinalServiceCall(call);
-//                    } else {
-                        if (nextCallNumber <= numOfDropDowns) {
-                            Call<List<VehicleMake>> listCall = makeCall(nextCallNumber, item, item, item);
-                            makeInitialServiceCall(listCall, nextCallNumber + 1);
-                        } else {
-                            trim = item;
-                        }
-//                    }
+                    if (nextCallNumber <= numOfDropDowns) {
+                        Call<List<VehicleMake>> listCall = makeCall(nextCallNumber, item, item, item);
+                        makeInitialServiceCall(listCall, nextCallNumber + 1);
+                    } else {
+                        trim = item;
+                    }
                 }
             }
 
@@ -262,7 +167,7 @@ public class VehicleSearch {
         });
     }
 
-    public int getCurrentSpinnerPosition() {
+    int getCurrentSpinnerPosition() {
         return spinner.getSelectedItemPosition();
     }
 
@@ -293,14 +198,14 @@ public class VehicleSearch {
         return call;
     }
 
-    public void requiredFiled() {
-        TextView errorText = (TextView)spinner.getSelectedView();
-        errorText.setError("Required field!");
+    void requiredFiled() {
+        TextView errorText = (TextView) spinner.getSelectedView();
+        errorText.setError(context.getString(R.string.field_required_error_text));
         errorText.setTextColor(Color.RED);//just to highlight that this is an error
-        errorText.setText("Required field!");
+        errorText.setText(context.getString(R.string.field_required_error_text));
     }
 
-    public void saveVehicleMakeList(List<VehicleMake> vehicleMakeList) {
+    private void saveVehicleMakeList(List<VehicleMake> vehicleMakeList) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -309,11 +214,12 @@ public class VehicleSearch {
         editor.apply();
     }
 
-    public ArrayList<VehicleMake> getVehicleMakeList(String key){
+    private ArrayList<VehicleMake> getVehicleMakeList() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = prefs.getString(key, null);
-        Type type = new TypeToken<List<VehicleMake>>() {}.getType();
+        String json = prefs.getString(PREF_VEHICLE_MAKES_LIST, null);
+        Type type = new TypeToken<List<VehicleMake>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 }

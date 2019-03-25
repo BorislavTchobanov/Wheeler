@@ -21,4 +21,9 @@
     <string name="main_menu_writeups_button_text">Write-ups</string>
     <string name="profile_name_field_required">Profile Name is required!</string>
     <string name="service_call_failure_message">Oops! Something went wrong with the call to the server!</string>
+    <string name="field_required_error_text">Required field!</string>
+    <string name="hint_text_make">Choose Make</string>
+    <string name="hint_text_model">Choose Model</string>
+    <string name="hint_text_year">Choose Year</string>
+    <string name="hint_text_trim">Choose Trim</string>
 </resources>

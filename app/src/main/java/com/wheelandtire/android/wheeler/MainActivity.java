@@ -22,7 +22,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String PROFILE_NAME_PREFS = "profileNamePrefs";
+    public static final String PROFILE_NAME_PREFS = "wheelerPrefs";
     public static final String PROFILE_NAME_KEY = "profileNameKey";
 
     private InterstitialAd interstitialAd;

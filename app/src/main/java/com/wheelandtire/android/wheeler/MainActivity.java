@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
@@ -25,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String PROFILE_NAME_PREFS = "wheelerPrefs";
     public static final String PROFILE_NAME_KEY = "profileNameKey";
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         MobileAds.initialize(this, getString(R.string.admob_application_code));
 
         TextView textView = findViewById(R.id.title_tv);

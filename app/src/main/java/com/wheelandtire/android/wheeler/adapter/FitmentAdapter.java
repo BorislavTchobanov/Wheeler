@@ -47,9 +47,7 @@ public class FitmentAdapter extends RecyclerView.Adapter<FitmentAdapter.VehicleG
     @Override
     public void onBindViewHolder(@NonNull VehicleGenerationViewHolder vehicleGenerationViewHolder, int position) {
         Vehicle vehicle = vehicleList.get(position);
-//        if (vehicle.getTrim() == null) {
-//            return;
-//        }
+
         final Generation generation = vehicleList.get(position).getGeneration();
         int vehicleImagesListSize = generation.getBodies().size();
         vehicleGenerationViewHolder.setVehicleImage(generation.getBodies()
@@ -66,8 +64,7 @@ public class FitmentAdapter extends RecyclerView.Adapter<FitmentAdapter.VehicleG
             return 0;
         }
 
-        //TODO there are still repeating cards. Check how to fix!
-        for(int j=0; j < vehicleList.size(); j++) {
+        for (int j = 0; j < vehicleList.size(); j++) {
             Vehicle vehicle = vehicleList.get(j);
             if (vehicle.getTrim() == null) {
                 vehicleList.remove(j);
@@ -85,7 +82,7 @@ public class FitmentAdapter extends RecyclerView.Adapter<FitmentAdapter.VehicleG
         VehicleGenerationViewHolder(View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.recipe_image);
+            imageView = itemView.findViewById(R.id.vehicleImage);
             itemView.setOnClickListener(this);
             generationNameTv = itemView.findViewById(R.id.generationTv);
             trimTv = itemView.findViewById(R.id.trimTv);

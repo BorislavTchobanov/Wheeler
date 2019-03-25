@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginStart="@dimen/recipe_list_item_margin_side"
-    android:layout_marginTop="@dimen/recipe_list_item_margin_side"
-    android:layout_marginEnd="@dimen/recipe_list_item_margin_side"
-    android:layout_marginBottom="@dimen/recipe_list_item_margin_bottom"
+    android:layout_marginStart="@dimen/item_margin_side"
+    android:layout_marginTop="@dimen/item_margin_side"
+    android:layout_marginEnd="@dimen/item_margin_side"
+    android:layout_marginBottom="@dimen/item_margin_bottom"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/recipe_list_item_margin_side">
+        android:padding="@dimen/item_margin_side">
 
         <ImageView
-            android:id="@+id/recipe_image"
+            android:id="@+id/vehicleImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -27,7 +27,7 @@
             android:id="@+id/generationTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_image"
+            android:layout_below="@id/vehicleImage"
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
@@ -35,9 +35,9 @@
             android:id="@+id/trimTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_image"
+            android:layout_below="@id/vehicleImage"
             android:layout_toEndOf="@id/generationTv"
-            android:layout_marginStart="@dimen/recipe_list_item_margin_bottom"
+            android:layout_marginStart="@dimen/item_margin_bottom"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
         <TextView
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@id/generationTv"
-            android:layout_marginStart="@dimen/recipe_list_item_margin_bottom" />
+            android:layout_marginStart="@dimen/item_margin_bottom" />
 
     </RelativeLayout>
 

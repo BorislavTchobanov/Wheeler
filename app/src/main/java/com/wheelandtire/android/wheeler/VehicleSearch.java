@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.wheelandtire.android.wheeler.adapter.CustomAdapter;
+import com.wheelandtire.android.wheeler.adapter.SpinnerAdapter;
 import com.wheelandtire.android.wheeler.model.VehicleMake;
 import com.wheelandtire.android.wheeler.utility.RetrofitClientInstance;
 import com.wheelandtire.android.wheeler.utility.WheelSizeService;
@@ -141,7 +141,7 @@ class VehicleSearch {
 
         vehicleMakeList.add(0, makeHint(nextCallNumber - 1));
 
-        final CustomAdapter dataAdapter = new CustomAdapter(context, android.R.layout.simple_spinner_item, vehicleMakeList);
+        final SpinnerAdapter dataAdapter = new SpinnerAdapter(context, android.R.layout.simple_spinner_item, vehicleMakeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 

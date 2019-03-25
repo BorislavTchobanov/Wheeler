@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wheelandtire.android.wheeler.R;
-import com.wheelandtire.android.wheeler.model.Wheel;
 
 import java.util.List;
 
@@ -71,6 +70,5 @@ public class WriteUpsAdapter extends RecyclerView.Adapter<WriteUpsAdapter.WriteU
         void setContentTv(String rimFront) {
             contentTv.setText(rimFront);
         }
-
     }
 }

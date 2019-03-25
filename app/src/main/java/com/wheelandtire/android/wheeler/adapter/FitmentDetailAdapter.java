@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wheelandtire.android.wheeler.R;
-import com.wheelandtire.android.wheeler.model.Generation;
 import com.wheelandtire.android.wheeler.model.Wheel;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+
 
 public class FitmentDetailAdapter extends RecyclerView.Adapter<FitmentDetailAdapter.FitmentDetailViewHolder> {
 

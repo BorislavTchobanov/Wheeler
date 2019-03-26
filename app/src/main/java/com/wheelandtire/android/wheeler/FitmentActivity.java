@@ -95,7 +95,8 @@ public class FitmentActivity extends AppCompatActivity
 
         goButton.setOnClickListener(v -> {
             if (checkRequiredFields()) {
-                Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(), vehicleSearch.getModel(),
+                Call<List<Vehicle>> call = service.getVehicle(BuildConfig.ApiKey,
+                        vehicleSearch.getMake(), vehicleSearch.getModel(),
                         vehicleSearch.getYear(), vehicleSearch.getTrim());
                 makeFinalServiceCall(call);
             }

@@ -179,22 +179,22 @@ class VehicleSearch {
         switch (caseIndex) {
             case 1:
                 spinner = rootView.findViewById(R.id.spinnerMake);
-                call = service.getVehicleMake();
+                call = service.getVehicleMake(BuildConfig.ApiKey);
                 break;
             case 2:
                 spinner = rootView.findViewById(R.id.spinnerModel);
                 this.make = make;
-                call = service.getVehicleModel(make);
+                call = service.getVehicleModel(BuildConfig.ApiKey, make);
                 break;
             case 3:
                 spinner = rootView.findViewById(R.id.spinnerYear);
                 this.model = model;
-                call = service.getVehicleYear(this.make, model);
+                call = service.getVehicleYear(BuildConfig.ApiKey, this.make, model);
                 break;
             case 4:
                 spinner = rootView.findViewById(R.id.spinnerTrim);
                 this.year = year;
-                call = service.getVehicleTrim(this.make, this.model, year);
+                call = service.getVehicleTrim(BuildConfig.ApiKey, this.make, this.model, year);
                 break;
             default:
         }

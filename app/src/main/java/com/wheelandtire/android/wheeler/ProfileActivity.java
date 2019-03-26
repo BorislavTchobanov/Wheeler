@@ -100,7 +100,8 @@ public class ProfileActivity extends AppCompatActivity {
                 if (!checkRequiredFields(profileNameTv.getText().toString())) {
                     break;
                 } else {
-                    Call<List<Vehicle>> call = service.getVehicle(vehicleSearch.getMake(),
+                    Call<List<Vehicle>> call = service.getVehicle(BuildConfig.ApiKey,
+                            vehicleSearch.getMake(),
                             vehicleSearch.getModel(),
                             vehicleSearch.getYear(),
                             vehicleSearch.getTrim());
